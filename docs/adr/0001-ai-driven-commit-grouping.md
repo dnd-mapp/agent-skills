@@ -1,0 +1,3 @@
+# AI-driven commit grouping over user-driven or hybrid
+
+The `commit` skill analyzes the full diff and proposes commit groups automatically. Hybrid (AI proposes, user reshuffles hunks) and user-driven (user assigns every hunk manually) were both considered. Hybrid was rejected because it adds review complexity for a user who explicitly trusts the AI's judgment. User-driven was rejected because it defeats the purpose of a skill — the manual work is what the skill is meant to replace. The user retains control by being able to edit commit messages and approve the full plan before anything is executed.
