@@ -1,0 +1,3 @@
+# Infer branch name from working-tree state rather than requiring upfront description
+
+The `create-branch` skill reads staged and unstaged changes, untracked files, and unpushed commits to propose a branch name — rather than requiring the user to provide a description before anything is read. This inverts the typical "create branch first, then work" flow: the skill is designed to be used both proactively (clean tree → description required) and retroactively (changes exist → infer from them). The alternative — always requiring a description — was rejected because the skill's primary value is reducing the effort of naming, and inferring from existing work delivers that better than prompting the user to articulate what they already did.
