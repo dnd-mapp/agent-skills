@@ -23,6 +23,7 @@ For more options, supported agents, and uninstall/update instructions, see the [
 
 ## Skills
 
-| Skill                            | Description                                           |
-|:---------------------------------|:------------------------------------------------------|
-| [commit](skills/commit/SKILL.md) | Groups working-tree changes into Conventional Commits |
+| Skill                                          | Description                                           |
+|:-----------------------------------------------|:------------------------------------------------------|
+| [commit](skills/commit/SKILL.md)               | Groups working-tree changes into Conventional Commits |
+| [create-branch](skills/create-branch/SKILL.md) | Infers a branch name from changes and creates it      |
