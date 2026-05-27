@@ -1,3 +1,28 @@
 # agent-skills
 
-Reusable Claude Code skills, sub-agents, and configurations for AI-assisted development workflows.
+Reusable agent skills for AI-assisted development workflows.
+
+## Requirements
+
+- Node.js ≥ 18
+
+## Install
+
+```sh
+# Install all skills (auto-detects your agent)
+npx skills add dnd-mapp/agent-skills
+
+# Install globally (available across all projects)
+npx skills add dnd-mapp/agent-skills -g
+
+# Install a specific skill
+npx skills add dnd-mapp/agent-skills --skill commit
+```
+
+For more options, supported agents, and uninstall/update instructions, see the [`skills`](https://npmx.dev/package/skills) package.
+
+## Skills
+
+| Skill                            | Description                                           |
+|:---------------------------------|:------------------------------------------------------|
+| [commit](skills/commit/SKILL.md) | Groups working-tree changes into Conventional Commits |
