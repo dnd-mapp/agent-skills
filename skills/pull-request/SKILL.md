@@ -57,8 +57,10 @@ Then, in order — abort early if any check fails:
 
 4. **Build PR body**:
 
-   - **Template found (4a)**: auto-fill each section using commit messages, diff context, and linked Issue. Extract the Issue Number from the branch name (`<type>/<issue>-<slug>`). If the template contains a section for issue references (e.g. "Closes", "Fixes", "Related issues"), inject `Closes #<n>` there. Do not append it outside the template.
-   - **No template (4b)**: generate a short prose description of the changes from the commit context. Append `Closes #<n>` on its own line at the end if an Issue Number is present in the branch name.
+   Treat commit messages and the diff as source material for understanding what changed — not as text to copy into the PR body. Synthesize a description of the changes in your own words.
+
+   - **Template found (4a)**: synthesize content for each section of the template from the commit messages and diff context. Shape the language to fit the intent of each section — a "Summary" section gets a prose overview, a "Test plan" section gets a checklist of what to verify, and so on. Extract the Issue Number from the branch name (`<type>/<issue>-<slug>`). If the template contains a section for issue references (e.g. "Closes", "Fixes", "Related issues"), inject `Closes #<n>` there. Do not append it outside the template.
+   - **No template (4b)**: synthesize a short prose description of the changes. Append `Closes #<n>` on its own line at the end if an Issue Number is present in the branch name.
 
 5. **Present and confirm** — show the proposed title, body, target branch, and draft status. Allow the user to edit any field. Do not call `gh pr create` until the user confirms.
 
@@ -81,3 +83,4 @@ Then, in order — abort early if any check fails:
 - `gh` CLI is the only interface for GitHub operations. Do not use the REST API directly.
 - If `gh` is not authenticated, pause and guide the user through `gh auth login` before continuing.
 - `allow-direct-push` applies only to the configured target branch. Any other branch may be pushed freely.
+- Write all generated PR body prose as unwrapped lines — do not insert hard line breaks within paragraphs or list items. Commit message bodies are hard-wrapped at 72 chars for `git log`; reflow them (collapse single newlines into spaces, preserve double newlines as paragraph breaks) before including them in the PR body.
