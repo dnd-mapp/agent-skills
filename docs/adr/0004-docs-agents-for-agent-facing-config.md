@@ -1,0 +1,3 @@
+# docs/agents/ for agent-facing operational config with progressive disclosure
+
+Agent-facing operational config (e.g., issue tracker schema, Issue Type definitions) lives under `docs/agents/` rather than inline in `CLAUDE.md`. `CLAUDE.md` points to `AGENTS.md`, which is the hub for all agent-facing pointers; each entry in `AGENTS.md` points to a specific config file under `docs/agents/`. This two-level indirection (CLAUDE.md → AGENTS.md → docs/agents/\*) was chosen so that agents only load detailed config when they need it, keeping the always-loaded `CLAUDE.md` minimal. The alternative — putting all config directly in `CLAUDE.md` — was rejected because it would bloat every session's context with config irrelevant to the current task.
