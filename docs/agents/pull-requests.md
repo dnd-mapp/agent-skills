@@ -6,7 +6,7 @@ main
 
 ## Direct push to target branch
 
-not allowed
+not allowed — run `/create-branch` automatically if on the target branch
 
 ## Draft by default
 
