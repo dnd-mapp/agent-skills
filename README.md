@@ -28,3 +28,4 @@ For more options, supported agents, and uninstall/update instructions, see the [
 | [commit](skills/commit/SKILL.md)                                   | Groups working-tree changes into Conventional Commits                |
 | [create-branch](skills/create-branch/SKILL.md)                     | Infers a branch name from changes and creates it                     |
 | [configure-issue-tracker](skills/configure-issue-tracker/SKILL.md) | Configures issue tracking — local, GitHub Issues, or GitHub Projects |
+| [create-issues](skills/create-issues/SKILL.md)                     | Extracts action items from conversation and codebase, creates Issues in the configured Tracker Backend |
