@@ -14,14 +14,26 @@ _Avoid_: Label, suffix, description
 
 ### Issue tracking
 
-**Issue**: A Markdown file at `docs/planning/issues/` representing a unit of tracked work, with a frontmatter block of structured fields and a free-form Markdown body. Scoped to local tracking; remote tracker support (GitHub, Jira) is planned.  
+**Issue**: A unit of tracked work whose representation depends on the configured backend. For the local backend: a Markdown file at `docs/planning/issues/` with a frontmatter block of structured fields and a free-form Markdown body. For GitHub without a Project: a GitHub Issue. For GitHub with a Project configured: a GitHub Projects item backed by a GitHub Issue.  
 _Avoid_: Ticket, card, item
 
-**Issue Type**: The user-defined classification of an Issue (e.g. Epic, Story, Task, Bug). Configured per repo. Not to be confused with the branch `type` from Conventional Commits.  
+**Issue Type**: The user-defined classification of an Issue (e.g. Epic, Story, Task, Bug). Configured per repo. Physical representation depends on the backend and GitHub context: a frontmatter field for local; a GitHub label for GitHub (personal repo, Issues only); a Projects v2 single-select custom field for GitHub (personal repo, with Project); a GitHub org-level issue type for GitHub (org repo) — in this case the type is set on the backing GitHub Issue and is visible in any associated Project without a separate Project field. Not to be confused with the branch `type` from Conventional Commits.  
 _Avoid_: Type (alone — collides with Conventional Commits branch type), kind
 
-**Issue Number**: A unique identifier for an Issue. Format depends on the repo's configured numbering scheme: global sequential (`#42`) or project identifier (`DND-42`).  
+**Issue Field**: A structured attribute of an Issue beyond its title and body. Physical representation depends on the Tracker Backend:
+
+- **local**: frontmatter key-value pair
+- **github-issues**: enumerated fields with few distinct values → GitHub label (severity and priority labels are prefixed: `severity:S1`, `priority:P0`); iteration → label (prefixed: `iteration:Q1-2026`); numeric/reference/free-text fields → inlined in the Issue body
+- **github-issues-projects**: Projects v2 custom field (single-select, number, text, or iteration type)
+- **github-issues + org**: org-level issue field
+
+_Avoid_: Attribute, property, metadata
+
+**Issue Number**: A unique identifier for an Issue. For the local backend: format depends on the configured numbering scheme — global sequential (`#42`) or project identifier (`DND-42`). For the GitHub backend: the GitHub Issue number (`#42`), always repo-scoped and assigned by GitHub. When a GitHub Project is configured, the Project item must be backed by a GitHub Issue, so the Issue Number is still the GitHub Issue number.  
 _Avoid_: ID, ticket number
+
+**Tracker Backend**: The configured storage and service mechanism for Issues. Current supported values: `local` (Markdown files), `github-issues` (GitHub Issues only), `github-issues-projects` (GitHub Issues backed by a GitHub Project). Jira support is planned.  
+_Avoid_: Backend (alone — too generic), integration, provider
 
 ### Agent configuration
 
