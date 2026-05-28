@@ -35,6 +35,14 @@ _Avoid_: ID, ticket number
 **Tracker Backend**: The configured storage and service mechanism for Issues. Current supported values: `local` (Markdown files), `github-issues` (GitHub Issues only), `github-issues-projects` (GitHub Issues backed by a GitHub Project). Jira support is planned.  
 _Avoid_: Backend (alone — too generic), integration, provider
 
+### Pull Requests
+
+**Pull Request**: A Branch submitted for peer review and merge into a target branch, created via `gh pr create`. A Pull Request may be a draft (open but not yet ready for review) or a ready-for-review PR. When the Branch name contains an Issue Number, the Pull Request body should reference it using a `Closes #<n>` keyword if the PR template provides a section for it.  
+_Avoid_: PR (in documentation — spell it out), Merge Request, Review Request
+
+**PR Template**: A Markdown file that provides a structured body skeleton for Pull Requests. Detected at two levels: repo-level (`.github/PULL_REQUEST_TEMPLATE.md` or `.github/PULL_REQUEST_TEMPLATE/` for multiples) and org-level (`<org>/.github` repository, same paths). Repo-level takes precedence when both exist. Selected once during the `pull-request` skill interview and stored in agent config.  
+_Avoid_: Template, body template (collides with Issue body template)
+
 ### Agent configuration
 
 **Agent config**: Operational documentation stored under `docs/agents/` that skills read to perform repo-specific tasks. Distinct from `CONTEXT.md` (domain glossary) and `CLAUDE.md` (session bootstrap).  
