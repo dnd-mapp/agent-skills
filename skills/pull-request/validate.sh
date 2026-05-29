@@ -59,18 +59,19 @@ for i in "${!lines[@]}"; do
     # 1 & 2. Section tracking and unfilled placeholder detection
     # -------------------------------------------------------------------------
     if [[ "$line" =~ ^#{1,6}[[:space:]] ]]; then
-        # A sub-heading counts as content for its parent section
-        section_has_content=true
-        # Flush only when we encounter a same-or-higher-level heading
         heading_level="${line%%[^#]*}"
         heading_level="${#heading_level}"
         current_level="${current_heading_level:-0}"
 
         if [[ $heading_level -le $current_level || -z "$current_heading" ]]; then
+            # Sibling or parent heading — flush current section before starting new one
             flush_section
             current_heading="${line#*# }"
             current_heading_level=$heading_level
             section_has_content=false
+        else
+            # Sub-heading counts as content for its parent section
+            section_has_content=true
         fi
         prev_line_was_text=false
         continue
