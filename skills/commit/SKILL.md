@@ -22,7 +22,7 @@ Groups all working-tree changes by intent and commits them using Conventional Co
 4. **Validate and fix** — for each drafted message, run [validate.sh](validate.sh):
 
    - If exit 0: message is valid, continue.
-   - If exit 1: read the `VIOLATION:` lines from stderr. Apply fixes — use the mechanically-fixed stdout as a starting point, then apply intelligent rewrites for violations that require judgment (e.g., subject too long). Re-run the script on the corrected message. Repeat until exit 0.
+   - If exit 1: read the `VIOLATION:` lines from stderr. Apply fixes using your own judgment, then re-run the script on the corrected message. Repeat until exit 0.
 
    Never present a message that has not passed validation.
 

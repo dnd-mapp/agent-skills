@@ -33,7 +33,7 @@ Derives a structured branch name from context and executes `git checkout -b`. Ne
 4. **Validate and fix** — run [validate.sh](validate.sh):
 
    - If exit 0: name is valid, continue.
-   - If exit 1: read the `VIOLATION:` lines from stderr. Apply fixes — use the mechanically-fixed stdout as a starting point, then apply intelligent rewrites for violations that require judgment (e.g., slug too long). Re-run the script on the corrected name. Repeat until exit 0.
+   - If exit 1: read the `VIOLATION:` lines from stderr. Apply fixes using your own judgment, then re-run the script on the corrected name. Repeat until exit 0.
 
    Never present a name that has not passed validation.
 
