@@ -32,6 +32,7 @@ violations=()
 # State tracking for section and code-block detection
 # ---------------------------------------------------------------------------
 current_heading=""
+current_heading_level=0
 section_has_content=false
 in_code_block=false
 prev_line_was_text=false
@@ -58,10 +59,19 @@ for i in "${!lines[@]}"; do
     # 1 & 2. Section tracking and unfilled placeholder detection
     # -------------------------------------------------------------------------
     if [[ "$line" =~ ^#{1,6}[[:space:]] ]]; then
-        # Flush the previous section before starting a new one
-        flush_section
-        current_heading="${line#*# }"
-        section_has_content=false
+        # A sub-heading counts as content for its parent section
+        section_has_content=true
+        # Flush only when we encounter a same-or-higher-level heading
+        heading_level="${line%%[^#]*}"
+        heading_level="${#heading_level}"
+        current_level="${current_heading_level:-0}"
+
+        if [[ $heading_level -le $current_level || -z "$current_heading" ]]; then
+            flush_section
+            current_heading="${line#*# }"
+            current_heading_level=$heading_level
+            section_has_content=false
+        fi
         prev_line_was_text=false
         continue
     fi
