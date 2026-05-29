@@ -30,11 +30,18 @@ Derives a structured branch name from context and executes `git checkout -b`. Ne
    - **issue**: from step 2, omit if not found.
    - **slug**: kebab-case phrase summarizing the work, **strictly ≤ 40 characters** — rewrite internally until it fits. Derive from the user's description if provided, otherwise from the changes.
 
-4. **Present and confirm** — show the proposed branch name. Allow the user to edit before proceeding. Do not execute until confirmed.
+4. **Validate and fix** — run [validate.sh](validate.sh):
 
-5. **Check for conflicts** — run `git branch --list <name>`. If the branch already exists, surface the conflict and ask the user whether to switch to it or choose a different name.
+   - If exit 0: name is valid, continue.
+   - If exit 1: read the `VIOLATION:` lines from stderr. Apply fixes using your own judgment, then re-run the script on the corrected name. Repeat until exit 0.
 
-6. **Execute** — run `git checkout -b <name>`.
+   Never present a name that has not passed validation.
+
+5. **Present and confirm** — show the proposed branch name. Allow the user to edit before proceeding. Do not execute until confirmed.
+
+6. **Check for conflicts** — run `git branch --list <name>`. If the branch already exists, surface the conflict and ask the user whether to switch to it or choose a different name.
+
+7. **Execute** — run `git checkout -b <name>`.
 
 ## Defaults
 

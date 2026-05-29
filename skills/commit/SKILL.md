@@ -19,9 +19,16 @@ Groups all working-tree changes by intent and commits them using Conventional Co
 
 3. **Draft commit messages** — for each group, produce a full message following the rules in [RULES.md](RULES.md).
 
-4. **Present plan** — show all proposed commits with their full messages. Allow the user to edit any message before proceeding. Do not execute until the user approves the plan.
+4. **Validate and fix** — for each drafted message, run [validate.sh](validate.sh):
 
-5. **Execute** — stage the exact hunks for each commit and run `git commit`. If a pre-commit hook fails on any commit, abort the entire plan immediately and report the failure.
+   - If exit 0: message is valid, continue.
+   - If exit 1: read the `VIOLATION:` lines from stderr. Apply fixes using your own judgment, then re-run the script on the corrected message. Repeat until exit 0.
+
+   Never present a message that has not passed validation.
+
+5. **Present plan** — show all proposed commits with their full messages. Allow the user to edit any message before proceeding. Do not execute until the user approves the plan.
+
+6. **Execute** — stage the exact hunks for each commit and run `git commit`. If a pre-commit hook fails on any commit, abort the entire plan immediately and report the failure.
 
 ## Defaults
 
