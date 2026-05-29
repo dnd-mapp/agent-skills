@@ -62,9 +62,16 @@ Then, in order — abort early if any check fails:
    - **Template found (4a)**: synthesize content for each section of the template from the commit messages and diff context. Shape the language to fit the intent of each section — a "Summary" section gets a prose overview, a "Test plan" section gets a checklist of what to verify, and so on. Extract the Issue Number from the branch name (`<type>/<issue>-<slug>`). If the template contains a section for issue references (e.g. "Closes", "Fixes", "Related issues"), inject `Closes #<n>` there. Do not append it outside the template.
    - **No template (4b)**: synthesize a short prose description of the changes. Append `Closes #<n>` on its own line at the end if an Issue Number is present in the branch name.
 
-5. **Present and confirm** — show the proposed title, body, target branch, and draft status. Allow the user to edit any field. Do not call `gh pr create` until the user confirms.
+5. **Validate and fix body** — run [validate.sh](validate.sh):
 
-6. **Create PR** — run:
+   - If exit 0: body is valid, continue.
+   - If exit 1: read the `VIOLATION:` lines from stderr. Apply fixes using your own judgment, then re-run the script on the corrected body. Repeat until exit 0.
+
+   Never present a body that has not passed validation.
+
+6. **Present and confirm** — show the proposed title, body, target branch, and draft status. Allow the user to edit any field. Do not call `gh pr create` until the user confirms.
+
+7. **Create PR** — run:
 
    ```sh
    gh pr create \
