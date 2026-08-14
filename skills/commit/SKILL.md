@@ -12,6 +12,8 @@ Turn the current working tree into one or more commits: group changes by intent,
 
 Re-derive the picture from scratch every time: `git status`, `git diff`, and `git diff --staged` together. Never treat whatever happens to already be staged as correct; re-plan the grouping from the full tree regardless of the current index.
 
+A freshly initialized repo has no commits yet (an unborn branch): `git log` fails on it instead of returning empty. Check for this up front rather than letting a downstream `git log` call error out.
+
 ## 2. Group by intent
 
 Each group becomes exactly one commit. A group is everything that serves one purpose:
@@ -21,7 +23,7 @@ Each group becomes exactly one commit. A group is everything that serves one pur
 - If the whole tree really is one intent, one commit is the correct output. Grouping doesn't mean forcing a split that isn't there.
 - Where changes have a dependency order (a refactor a following feature builds on), commit them in that order.
 
-This repo's own history never uses a `type(scope):` scope: match that unless a scope clearly earns its place. For a breaking change, mark it with `!` after the type (and/or a `BREAKING CHANGE:` footer).
+Check `git log` for this repo's own convention around the `type(scope):` scope, and match it unless a scope clearly earns its place. If there's no history yet to learn from, default to no scope. For a breaking change, mark it with `!` after the type (and/or a `BREAKING CHANGE:` footer).
 
 ## 3. Draft, then review before touching git state
 
