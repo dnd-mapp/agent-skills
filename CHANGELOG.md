@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 - `commit` skill: drafts Conventional Commits messages and groups changes into separate commits by intent, showing the plan for review before applying it.
+- Claude Code plugin registration (`.claude-plugin/plugin.json` and `marketplace.json`), so this repo installs directly as the `dnd-mapp` plugin.
 
 ### Changed
 

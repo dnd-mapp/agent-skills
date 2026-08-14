@@ -1,0 +1,16 @@
+{
+    "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+    "name": "dnd-mapp",
+    "description": "Claude Code Agent Skills and Subagent definitions for the dnd-mapp organization",
+    "owner": {
+        "name": "dnd-mapp",
+        "url": "https://github.com/dnd-mapp"
+    },
+    "plugins": [
+        {
+            "name": "dnd-mapp",
+            "source": "./",
+            "description": "Claude Code Agent Skills and Subagent definitions for the dnd-mapp organization"
+        }
+    ]
+}

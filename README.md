@@ -16,8 +16,8 @@ Claude Code Agent Skills and Subagent definitions for the `dnd-mapp` organizatio
 
 Skills published here are installable either:
 
-- as a Claude Code plugin, or
-- via the [`skills`](https://www.npmjs.com/package/skills) package: `npx skills add dnd-mapp/agent-skills`
+- as the `dnd-mapp` Claude Code plugin, or
+- via the [`skills`](https://www.npmjs.com/package/skills) package: `pnpm dlx skills add dnd-mapp/agent-skills`
 
 ## Guides
 
