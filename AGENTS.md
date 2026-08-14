@@ -1,0 +1,15 @@
+# Agent instructions
+
+## Conventions
+
+Commit message and CI conventions shared across all `dnd-mapp` repositories are documented in [GitHub Repository Conventions](https://github.com/dnd-mapp/wiki/blob/main/pages/development-conventions/github.md).
+
+Pull request conventions are documented in [Creating a Pull Request](https://github.com/dnd-mapp/wiki/blob/main/pages/development-conventions/creating-a-pull-request.md).
+
+## Commit conventions
+
+- Draft commit messages and get confirmation before committing.
+
+## Pull requests
+
+This repo uses GitHub for pull requests. For configuration, see [docs/agents/pull-requests.md](docs/agents/pull-requests.md).

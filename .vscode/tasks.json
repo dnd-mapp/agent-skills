@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "format",
+            "label": "format",
+            "detail": "prettier -w .",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "format-check",
+            "label": "format-check",
+            "detail": "prettier -l .",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "lint-md",
+            "label": "lint-md",
+            "detail": "markdownlint-cli2",
+            "problemMatcher": []
+        }
+    ]
+}

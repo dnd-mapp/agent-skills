@@ -1,0 +1,10 @@
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+.claude/worktrees/
+
+node_modules/
+.husky/_/
