@@ -8,7 +8,7 @@ Pull request conventions are documented in [Creating a Pull Request](https://git
 
 ## Commit conventions
 
-- Draft commit messages and get confirmation before committing.
+Run the `commit` skill ([skills/commit/SKILL.md](skills/commit/SKILL.md)) to commit changes.
 
 ## Pull requests
 

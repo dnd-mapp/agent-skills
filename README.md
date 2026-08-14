@@ -6,9 +6,15 @@ Claude Code Agent Skills and Subagent definitions for the `dnd-mapp` organizatio
 
 - [mise](https://mise.jdx.dev/) (recommended): manages the Node.js and pnpm versions this repo pins in `package.json`'s `devEngines` field. Run `mise install` after installing it to pick up matching versions automatically.
 
+## Available skills
+
+| Skill                              | Description                                                                                                                                        |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`commit`](skills/commit/SKILL.md) | Commit the working tree, grouped into separate commits by intent with Conventional Commits messages, reviewed with you before anything is applied. |
+
 ## Using skills from this repo
 
-Once skills or subagents are published here, they'll be installable either:
+Skills published here are installable either:
 
 - as a Claude Code plugin, or
 - via the [`skills`](https://www.npmjs.com/package/skills) package: `npx skills add dnd-mapp/agent-skills`
