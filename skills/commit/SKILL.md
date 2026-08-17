@@ -25,13 +25,25 @@ Each group becomes exactly one commit. A group is everything that serves one pur
 
 Check `git log` for this repo's own convention around the `type(scope):` scope, and match it unless a scope clearly earns its place. If there's no history yet to learn from, default to no scope. For a breaking change, mark it with `!` after the type (and/or a `BREAKING CHANGE:` footer).
 
-## 3. Body
+## 3. Subject
+
+The subject is the free text after `type(scope):` on the header line.
+
+Write it lowercase, with no trailing period. `commitlint` already enforces both; state them here so a draft gets them right the first time instead of finding out from the hook.
+
+Use the imperative mood: `add retry logic`, not `added retry logic` or `adds retry logic`.
+
+Keep it to about 50 characters. `commitlint`'s enforced ceiling is 100, but a subject that long already reads poorly once truncated in `git log --oneline` or a narrow terminal.
+
+Be specific about what changed, not just mechanically correct: `fix bug` or `update code` passes every rule above and still tells a future reader nothing.
+
+## 4. Body
 
 Add a body when the subject line alone doesn't make the *why* self-evident: what problem this solves, what changed from before, why this approach over an alternative. Skip it when the subject already says everything a future reader needs.
 
 Explain *why*, not *how*: the diff already shows how. Write it as prose, not an imperative-mood continuation of the subject; the imperative-mood rule applies to the subject line only. Wrap at 72 characters, separated from the subject by one blank line.
 
-## 4. Footer
+## 5. Footer
 
 Add a footer when one of these applies to the commit:
 
@@ -42,15 +54,15 @@ Add a footer when one of these applies to the commit:
 - **`DEPRECATED: <what, and the replacement>`**: this commit deprecates a skill, agent, or other behavior.
 - **`Co-authored-by: Name <email>`**: the commit has more than one author.
 
-To find an issue/ticket number: check the current branch name for a plausible reference (e.g. a leading issue number) and, if found, propose it as part of the draft in step 5 rather than asserting it silently; the user confirms or corrects it there. Don't invent a reference that isn't in the branch name or given by the user.
+To find an issue/ticket number: check the current branch name for a plausible reference (e.g. a leading issue number) and, if found, propose it as part of the draft in step 6 rather than asserting it silently; the user confirms or corrects it there. Don't invent a reference that isn't in the branch name or given by the user.
 
 In a multi-commit split, only add a ticket footer to the commit(s) whose intent actually matches that ticket, not every commit in the group.
 
-## 5. Draft, then review before touching git state
+## 6. Draft, then review before touching git state
 
 Present the full plan: each group's files (or hunks) alongside its exact drafted commit message. Wait for explicit approval before running any `git add` or `git commit`. If changes are requested, revise the plan and present it again rather than applying part of it.
 
-## 6. Apply
+## 7. Apply
 
 Once approved, work through the groups in order: stage exactly that group's files or hunks, commit with the reviewed message, then move to the next group. Finish by showing the resulting `git log` so the outcome is visible.
 
