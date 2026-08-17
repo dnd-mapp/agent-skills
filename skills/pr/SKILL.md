@@ -37,6 +37,8 @@ Derive a Conventional Commits `type(scope): description` title, in the imperativ
 
 From the same diff, draft what changed and why, written to fit whatever summary-style section the template fetched in step 2 defines. Again read the diff, not the commit messages, for the same portability reason as the title.
 
+Write it as flowing paragraphs, not hard-wrapped like a `/commit` body: GitHub renders this as Markdown, so wrapped source lines just add noise without changing how it displays.
+
 ## 6. Find related issues
 
 Look for `Closes:`, `Refs:`, or `Resolves:` trailers across the branch's commits (`git log <target>..HEAD`), `/commit`'s own vocabulary, and re-emit them as PR-level closing keywords (`Closes #123`, `Refs #123`) fitted to the template's related-issues section. If none are found, fall back to a leading issue number in the branch name, `/branch`'s convention.
