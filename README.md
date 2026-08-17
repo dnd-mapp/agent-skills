@@ -6,6 +6,7 @@ Claude Code Agent Skills and Subagent definitions for the `dnd-mapp` organizatio
 
 | Skill                              | Description                                                                                                                                        |
 |------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`branch`](skills/branch/SKILL.md) | Create a git branch named for the work ahead, following this org's branch naming convention.                                                       |
 | [`commit`](skills/commit/SKILL.md) | Commit the working tree, grouped into separate commits by intent with Conventional Commits messages, reviewed with you before anything is applied. |
 
 ## Using skills from this repo
