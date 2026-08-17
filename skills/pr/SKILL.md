@@ -1,7 +1,6 @@
 ---
 name: pr
-description: Draft a pull request for the current branch (title, description, related issues, and checklist derived from the diff), reviewed with you before opening it with `gh pr create`.
-disable-model-invocation: true
+description: Draft a pull request for the current branch (title, description, related issues, and checklist derived from the diff), reviewed with you before opening it with `gh pr create`. Use when the user wants to open or update a pull request, or when another skill needs one opened.
 ---
 
 # PR

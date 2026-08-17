@@ -1,7 +1,6 @@
 ---
 name: branch
-description: Create a git branch named for the work about to happen, deriving the type and slug from the diff, a known issue, or a description.
-disable-model-invocation: true
+description: Create a git branch named for the work about to happen, deriving the type and slug from the diff, a known issue, or a description. Use when the user wants to start new work or asks to create a branch, or when another skill needs a branch before it can proceed.
 ---
 
 # Branch
