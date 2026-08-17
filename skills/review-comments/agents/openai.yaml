@@ -1,0 +1,3 @@
+interface:
+    display_name: 'Review Comments'
+    short_description: 'Draft and post PR review comments for approval'

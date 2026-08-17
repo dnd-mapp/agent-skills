@@ -17,3 +17,7 @@ This repo uses GitHub for pull requests. For configuration, see [docs/agents/pul
 ## Wayfinding
 
 Wayfinder maps and tickets are tracked as local Markdown files. For configuration, see [docs/agents/wayfinder.md](docs/agents/wayfinder.md).
+
+## Review comments
+
+Run the `review-comments` skill ([skills/review-comments/SKILL.md](skills/review-comments/SKILL.md)) to draft and post PR review comments. For configuration, see [docs/agents/review-comments.md](docs/agents/review-comments.md).
