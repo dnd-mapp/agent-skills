@@ -23,7 +23,7 @@ Each group becomes exactly one commit. A group is everything that serves one pur
 - If the whole tree really is one intent, one commit is the correct output. Grouping doesn't mean forcing a split that isn't there.
 - Where changes have a dependency order (a refactor a following feature builds on), commit them in that order.
 
-Check `git log` for this repo's own convention around the `type(scope):` scope, and match it unless a scope clearly earns its place. If there's no history yet to learn from, default to no scope. For a breaking change, mark it with `!` after the type (and/or a `BREAKING CHANGE:` footer).
+Check `git log` for this repo's own convention around the `type(scope):` scope, and match it unless a scope clearly earns its place. If there's no history yet to learn from, default to no scope. For a breaking change, mark it with `!` after the type (and/or a `BREAKING CHANGE:` trailer).
 
 ## 3. Subject
 
@@ -43,20 +43,20 @@ Add a body when the subject line alone doesn't make the *why* self-evident: what
 
 Explain *why*, not *how*: the diff already shows how. Write it as prose, not an imperative-mood continuation of the subject; the imperative-mood rule applies to the subject line only. Wrap at 72 characters, separated from the subject by one blank line.
 
-## 5. Footer
+## 5. Trailer
 
-Add a footer when one of these applies to the commit:
+Add a trailer when one of these applies to the commit:
 
 - **`BREAKING CHANGE: <description>`**: for a breaking change (see step 2).
 - **`Refs: #<issue>`**: this commit relates to an issue/ticket, without closing it.
-- **`Closes: #<issue>`**: this commit resolves an issue/ticket. Use `Closes:` even though GitHub only registers a closing keyword from a PR description, not a commit message; it still tells a human reading `git log` what this commit was for. See [ADR 0001](../../docs/adr/0001-keep-issue-closing-keywords-in-commit-footers.md).
+- **`Closes: #<issue>`**: this commit resolves an issue/ticket. Use `Closes:` even though GitHub only registers a closing keyword from a PR description, not a commit message; it still tells a human reading `git log` what this commit was for. See [ADR 0001](../../docs/adr/0001-keep-issue-closing-keywords-in-commit-trailers.md).
 - **`Link: <url>`**: external context worth preserving (a discussion, a design doc, a reference) that isn't an issue reference.
 - **`DEPRECATED: <what, and the replacement>`**: this commit deprecates a skill, agent, or other behavior.
 - **`Co-authored-by: Name <email>`**: the commit has more than one author.
 
 To find an issue/ticket number: check the current branch name for a plausible reference (e.g. a leading issue number) and, if found, propose it as part of the draft in step 6 rather than asserting it silently; the user confirms or corrects it there. Don't invent a reference that isn't in the branch name or given by the user.
 
-In a multi-commit split, only add a ticket footer to the commit(s) whose intent actually matches that ticket, not every commit in the group.
+In a multi-commit split, only add a ticket trailer to the commit(s) whose intent actually matches that ticket, not every commit in the group.
 
 ## 6. Draft, then review before touching git state
 
