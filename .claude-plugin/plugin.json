@@ -1,7 +1,7 @@
 {
     "name": "dnd-mapp",
     "description": "Claude Code Agent Skills and Subagent definitions for the dnd-mapp organization",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "author": {
         "name": "dnd-mapp",
         "url": "https://github.com/dnd-mapp"
