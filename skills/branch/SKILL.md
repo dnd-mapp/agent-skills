@@ -12,11 +12,11 @@ Create a new git branch named for the work it's about to hold, following this or
 
 Prefer, in order:
 
-1. **The diff.** If the working tree already has staged or unstaged changes, derive the type and slug from `git diff` and `git diff --staged` together — read the actual change, not just file names. If the diff clearly mixes unrelated intents (the kind the `commit` skill would split into separate commits), don't guess at a dominant one: ask what the branch is for.
+1. **The diff.** If the working tree already has staged or unstaged changes, derive the type and slug from `git diff` and `git diff --staged` together, reading the actual change rather than just file names. If the diff clearly mixes unrelated intents (the kind the `commit` skill would split into separate commits), don't guess at a dominant one: ask what the branch is for.
 2. **A known issue.** If a GitHub issue number was given in conversation or at invocation, use its title to inform word choice for the slug.
 3. **A description.** If there's no diff and no issue, ask what the branch is for and derive the type and slug from the answer.
 
-The `<type>` is one of the [Conventional Commits](https://www.conventionalcommits.org/) types (`feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`) — the same vocabulary the `commit` skill uses.
+The `<type>` is one of the [Conventional Commits](https://www.conventionalcommits.org/) types (`feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`), the same vocabulary the `commit` skill uses.
 
 The `<slug>` follows the same quality bar as a commit subject: lowercase, kebab-case, specific enough to distinguish this branch from another of the same type (`add-login-flow`, not `fix-bug`).
 
@@ -25,10 +25,10 @@ The `<slug>` follows the same quality bar as a commit subject: lowercase, kebab-
 Detect the repo's default branch (`main` or `master`) rather than assuming.
 
 - **On the default branch already**: update it (`git pull --ff-only` or equivalent) before branching, so the new branch starts from its latest commit.
-- **On another branch**: ask how to proceed — switch to the default branch (updating it first) and branch from there, branch from the current branch anyway (for intentional stacked work), or stop and leave it to be handled manually. Each is a legitimate workflow; don't assume.
+- **On another branch**: ask which of three options to take. Switch to the default branch (updating it first) and branch from there. Branch from the current branch anyway, for intentional stacked work. Or stop and leave it to be handled manually. Each is a legitimate workflow; don't assume.
 
 ## 3. Create the branch
 
 Combine type, optional issue number, and slug into the branch name, then create it locally (`git checkout -b <name>` or `git switch -c <name>`) from the base branch determined in step 2.
 
-Never push the branch or set upstream tracking — that happens later, alongside the first commit or push, not here.
+Never push the branch or set upstream tracking. That happens later, alongside the first commit or push, not here.
