@@ -19,7 +19,7 @@ pnpm install
 
 ## Adding a skill
 
-New skills live at `skills/<name>/SKILL.md`. Frontmatter needs a `name` and `description`; add `disable-model-invocation: true` if the skill should only run when explicitly invoked (see [`skills/commit/SKILL.md`](skills/commit/SKILL.md) for a working example). Keep terminology consistent with [CONTEXT.md](CONTEXT.md) ("Agent Skill", not "skill file" or "plugin"). Add the new skill to the [Available skills](README.md#available-skills) table in `README.md` so it's discoverable.
+New skills live at `skills/<name>/SKILL.md`. Frontmatter needs a `name` and `description`; add `disable-model-invocation: true` if the skill should only run when explicitly invoked (see [`skills/ship/SKILL.md`](skills/ship/SKILL.md) for a working example). Otherwise, write the description so an agent can tell when to invoke it on its own: state what the skill does, then when to use it (see [`skills/commit/SKILL.md`](skills/commit/SKILL.md)). Keep terminology consistent with [CONTEXT.md](CONTEXT.md) ("Agent Skill", not "skill file" or "plugin"). Add the new skill to the [Available skills](README.md#available-skills) table in `README.md` so it's discoverable.
 
 If you're using Claude Code, the `writing-for-agents` skill covers conventions for authoring `SKILL.md`, `AGENTS.md`, and `CLAUDE.md` files.
 

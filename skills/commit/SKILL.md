@@ -1,7 +1,6 @@
 ---
 name: commit
-description: Commit the working tree, grouped into separate commits by intent with Conventional Commits messages, reviewed with you before anything is applied.
-disable-model-invocation: true
+description: Commit the working tree, grouped into separate commits by intent with Conventional Commits messages, reviewed with you before anything is applied. Use when the user wants to commit or save changes, or when another skill needs the working tree committed before it can proceed.
 ---
 
 # Commit
