@@ -13,3 +13,7 @@ Run the `commit` skill ([skills/commit/SKILL.md](skills/commit/SKILL.md)) to com
 ## Pull requests
 
 This repo uses GitHub for pull requests. For configuration, see [docs/agents/pull-requests.md](docs/agents/pull-requests.md).
+
+## Wayfinding
+
+Wayfinder maps and tickets are tracked as local Markdown files. For configuration, see [docs/agents/wayfinder.md](docs/agents/wayfinder.md).
