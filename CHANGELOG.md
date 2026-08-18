@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-08-18
+
+### Added
+
+- `review-comments` skill: runs `/code-review` against a pull request, drafts one PR-level comment plus per-finding inline comments for approval, then posts them as a single GitHub review under a configured account. Registered in the plugin manifest's `skills` list alongside `branch`, `commit`, `pr`, and `ship`.
+
+### Changed
+
+- Plugin manifest (`.claude-plugin/plugin.json`) now declares `displayName`, `homepage`, `repository`, and `license`.
+
 ## [1.0.0] - 2026-08-17
 
 ### Added
@@ -20,5 +30,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Repo identity (name, description, README, `CONTEXT.md`) updated to reflect its actual purpose: building Agent Skills and Subagent definitions for `dnd-mapp`.
 
-[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/dnd-mapp/agent-skills/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.0.0
