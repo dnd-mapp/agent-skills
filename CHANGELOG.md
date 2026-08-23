@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-08-23
+
+### Changed
+
+- `review-comments` skill now fetches every review thread the configured account has posted on the PR before drafting. It skips a new finding that matches an existing thread: one that's resolved, has a reply judged as fixing it, or is already open and unresolved. Matching relies on reading comprehension rather than file and line, since line numbers drift between commits. An ambiguous match is posted rather than suppressed. See ADR 0002 for the fuller rationale.
+
 ## [1.1.0] - 2026-08-18
 
 ### Added
@@ -30,6 +36,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Repo identity (name, description, README, `CONTEXT.md`) updated to reflect its actual purpose: building Agent Skills and Subagent definitions for `dnd-mapp`.
 
-[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.1.0...HEAD
-[1.1.0]: https://github.com/dnd-mapp/agent-skills/compare/v1.0.0...v1.1.0
+[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.2.0
+[1.1.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.1.0
 [1.0.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.0.0
