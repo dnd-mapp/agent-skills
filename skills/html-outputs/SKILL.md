@@ -26,3 +26,7 @@ Markdown is compact and easy to edit, but it becomes hard to read and share once
 ## When Markdown is still fine
 
 Short, simple outputs, especially ones under about a hundred lines with no need for tables, diagrams, or interactivity, are still well served by Markdown. Use judgment: the goal is readability and usefulness, not reaching for HTML by default.
+
+## Before finalizing
+
+Whichever format you land on, run the `writing-style` skill over the prose before presenting it as finished.
