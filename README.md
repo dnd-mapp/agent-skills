@@ -4,12 +4,13 @@ Claude Code Agent Skills and Subagent definitions for the `dnd-mapp` organizatio
 
 ## Available skills
 
-| Skill                              | Description                                                                                                                                                 |
-|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [`branch`](skills/branch/SKILL.md) | Create a git branch named for the work ahead, following this org's branch naming convention.                                                                |
-| [`commit`](skills/commit/SKILL.md) | Commit the working tree, grouped into separate commits by intent with Conventional Commits messages, reviewed with you before anything is applied.          |
-| [`pr`](skills/pr/SKILL.md)         | Draft a pull request for the current branch (title, description, related issues, and checklist derived from the diff), reviewed with you before opening it. |
-| [`ship`](skills/ship/SKILL.md)     | Take the working tree to an open pull request by running `branch`, `commit`, and `pr` in order.                                                             |
+| Skill                                          | Description                                                                                                                                                 |
+|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`branch`](skills/branch/SKILL.md)             | Create a git branch named for the work ahead, following this org's branch naming convention.                                                                |
+| [`commit`](skills/commit/SKILL.md)             | Commit the working tree, grouped into separate commits by intent with Conventional Commits messages, reviewed with you before anything is applied.          |
+| [`html-outputs`](skills/html-outputs/SKILL.md) | Decide whether to produce HTML instead of Markdown for a spec, plan, report, review, or other rich output.                                                  |
+| [`pr`](skills/pr/SKILL.md)                     | Draft a pull request for the current branch (title, description, related issues, and checklist derived from the diff), reviewed with you before opening it. |
+| [`ship`](skills/ship/SKILL.md)                 | Take the working tree to an open pull request by running `branch`, `commit`, and `pr` in order.                                                             |
 
 ## Using skills from this repo
 

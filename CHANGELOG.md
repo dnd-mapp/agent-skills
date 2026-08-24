@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- `html-outputs` skill: decides whether a spec, plan, report, review, or other rich output should be produced as HTML instead of Markdown, and when Markdown is still the better fit.
+
 ## [1.2.0] - 2026-08-23
 
 ### Changed
