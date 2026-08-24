@@ -29,4 +29,4 @@ Flag any sentence that's hard to follow in one read, especially ones with severa
 
 ## 3. Re-read before finishing
 
-Do this as a last pass after drafting, not while drafting. Write the content first, then re-read it once, checking specifically for em dashes and long sentences, and fix anything found before presenting the result as done.
+Write the content first, then re-read it once, checking specifically for em dashes and long sentences, and fix anything found before presenting the result as done.

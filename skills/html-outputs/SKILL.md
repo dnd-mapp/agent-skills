@@ -20,7 +20,7 @@ Markdown is compact and easy to edit, but it becomes hard to read and share once
 - **Code review and understanding:** rendering diffs with inline annotations, severity color-coding, and flowcharts to explain unfamiliar logic in a change.
 - **Design and prototypes:** sketching a UI or interaction, including animations or tunable parameters, before it gets ported into the real implementation language.
 - **Reports, research, and learning:** explainers, status reports, and incident write-ups that synthesize several sources and benefit from diagrams.
-- **Custom editing interfaces:** a one-off, purpose-built editor for a specific task, such as triaging a backlog or editing structured config. It typically ends in a "copy as JSON" or "copy as prompt" button so the result can be pasted back into the conversation.
+- **Custom editing interfaces:** a one-off, purpose-built editor for a specific task, such as triaging a backlog or editing structured config, ending in the copy-out button described above.
 
 ## When Markdown is still fine
 
