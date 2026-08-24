@@ -9,7 +9,7 @@ A review pass over prose you just wrote, done as a last step before presenting i
 
 ## 1. Remove em dashes
 
-Em dashes (—) are not allowed anywhere in the output. Replace each one with whichever fits the sentence best:
+The em dash character is not allowed anywhere in the output. Replace each one with whichever fits the sentence best:
 
 - A period, splitting the sentence in two.
 - A comma, if the clauses are short and closely related.
