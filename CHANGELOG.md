@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- `html-outputs` skill: decides whether a spec, plan, report, review, or other rich output should be produced as HTML instead of Markdown, or as a small interactive tool instead of a static document.
+- `writing-style` skill: reviews prose for em dashes and overlong sentences before presenting it as finished, including PR/issue text posted via `gh`.
+
 ## [1.2.0] - 2026-08-23
 
 ### Changed
