@@ -1,6 +1,6 @@
 ---
 name: html-outputs
-description: Decide whether to produce HTML instead of Markdown, or build a small interactive HTML tool such as a custom editor or prototype, for a spec, plan, report, review, or other rich output. Use when generating a substantial written deliverable meant to be shared as a link, or one with tables, diagrams, or comparisons that don't fit plain Markdown. Also reach for it when a tunable interactive tool would serve the task better than a static document.
+description: Decide whether to produce a spec, plan, report, review, or other rich output as HTML instead of Markdown, or as a small interactive tool instead of a static document. Use it when a deliverable is substantial enough to share as a link, or needs tables, diagrams, or comparisons Markdown renders poorly. Reach for the interactive form when a tunable, hands-on artifact would serve the task better than either static format.
 ---
 
 # HTML Outputs
@@ -24,7 +24,7 @@ Markdown is compact and easy to edit, but it becomes hard to read and share once
 
 ## When Markdown is still fine
 
-Short, simple outputs, especially ones under about a hundred lines with no need for tables, diagrams, or interactivity, are still well served by Markdown. Use judgment: the goal is readability and usefulness, not reaching for HTML by default.
+Short, simple outputs below that same threshold, with no need for tables, diagrams, or interactivity, are still well served by Markdown. Use judgment, weighing readability and usefulness over defaulting to HTML.
 
 ## Before finalizing
 

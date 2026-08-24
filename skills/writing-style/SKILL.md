@@ -17,7 +17,7 @@ The em dash character is not allowed anywhere in the output. Replace each one wi
 - Parentheses, for a true aside.
 - A connecting word such as "and," "but," "so," or "because," if that reads more naturally.
 
-Don't default to a hyphen or semicolon; pick whichever keeps the sentence clearest.
+Prefer one of the options above to a hyphen or semicolon swap, picking whichever keeps the sentence clearest.
 
 ## 2. Shorten long sentences
 
