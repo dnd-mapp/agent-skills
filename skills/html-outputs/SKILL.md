@@ -1,6 +1,6 @@
 ---
 name: html-outputs
-description: Decide whether to produce HTML instead of Markdown for a spec, plan, report, review, or other rich output. Use when generating a substantial written deliverable, especially one with tables, diagrams, comparisons, or content meant to be shared as a link rather than opened in an editor.
+description: Decide whether to produce HTML instead of Markdown, or build a small interactive HTML tool, for a spec, plan, report, review, or other rich output. Use when generating a substantial written deliverable meant to be shared as a link, or one with tables, diagrams, or comparisons that don't fit plain Markdown. Also use when a tunable interactive tool, such as a custom editor or prototype, would serve the task better than a static document.
 ---
 
 # HTML Outputs
