@@ -1,6 +1,6 @@
 ---
 name: writing-style
-description: Review prose for em dashes and overlong sentences before finalizing it. Use when writing or updating documentation, README files, PRDs, ADRs, commit messages, code comments, or other free text meant to be read later, including PR or issue text posted via `gh`. Does not apply to ordinary conversational replies.
+description: Review prose for em dashes and overlong sentences before finalizing it. Use when writing any output meant to be reused, not just files saved to disk, including PR or issue text posted via `gh`. Does not apply to ordinary conversational replies.
 ---
 
 # Writing Style
