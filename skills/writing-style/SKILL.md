@@ -5,7 +5,7 @@ description: Review prose for em dashes and overlong sentences before finalizing
 
 # Writing Style
 
-A review pass over prose you just wrote, done as a last step before presenting it as finished. Prose posted through a CLI like `gh` (PR and issue titles, bodies, comments) gets this as its only check, since that path has no normal edit-and-review flow of its own.
+A review pass over prose you just wrote, done as a last step before presenting it as finished. Prose posted through a CLI like `gh` (PR and issue titles, bodies, comments) gets this as its only check, since that path has no normal edit-and-review flow of its own. Applies to HTML output as well as Markdown.
 
 ## 1. Remove em dashes
 
