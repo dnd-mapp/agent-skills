@@ -5,7 +5,7 @@ description: Decide whether to produce HTML instead of Markdown for a spec, plan
 
 # HTML Outputs
 
-Markdown is compact and easy to edit, but becomes hard to read and share once an output grows past roughly a hundred lines or needs to convey more than plain text and lists. Reach for HTML instead whenever the output would benefit from structure, visuals, or shareability, and default to Markdown for shorter, simpler ones.
+Markdown is compact and easy to edit. But it becomes hard to read and share once an output grows past roughly a hundred lines, or needs to convey more than plain text and lists. Reach for HTML instead whenever the output would benefit from structure, visuals, or shareability, and default to Markdown for shorter, simpler ones.
 
 ## Why HTML helps
 
