@@ -53,7 +53,7 @@ If this call fails (rate limit, transient API error, etc.), surface a loud warni
 
 ## 4. Check the configured account's auth status
 
-Check `gh auth status` for the account from step 1. If it isn't authenticated, surface a loud warning now (drafting still proceeds) so the user can go authenticate it while steps 5 through 8 run. Never skip this because the user says it's already authenticated; check it yourself. This is a heads-up only: the check that actually gates posting is the mandatory re-check in step 10.
+Check `gh auth status` for the account from step 1. If it isn't authenticated, surface a loud warning now (drafting still proceeds) so the user can go authenticate it while steps 5 through 9 run. Never skip this because the user says it's already authenticated; check it yourself. This is a heads-up only: the check that actually gates posting is the mandatory re-check in step 10.
 
 ## 5. Check out the PR into an isolated worktree
 
