@@ -53,7 +53,7 @@ If this call fails (rate limit, transient API error, etc.), surface a loud warni
 
 ## 4. Check the configured account's auth status
 
-Check `gh auth status` for the account from step 1. If it isn't authenticated, surface a loud warning now (drafting still proceeds) so the user can go authenticate it while steps 5 through 8 run. Never skip this because the user says it's already authenticated; check it yourself. This is a heads-up only: the check that actually gates posting is the mandatory re-check in step 9.
+Check `gh auth status` for the account from step 1. If it isn't authenticated, surface a loud warning now (drafting still proceeds) so the user can go authenticate it while steps 5 through 9 run. Never skip this because the user says it's already authenticated; check it yourself. This is a heads-up only: the check that actually gates posting is the mandatory re-check in step 10.
 
 ## 5. Check out the PR into an isolated worktree
 
@@ -77,7 +77,7 @@ Read the diff and `/code-review`'s prose findings together, in the same context,
 For every finding that anchors to a file+line, check it by reading comprehension against the threads gathered in step 3. Never match mechanically on line number, since lines drift between commits:
 
 - Matches a thread that's resolved, or has a reply you judge as fixing it: an **Addressed Finding**. Drop it; no inline comment.
-- Matches a thread that's neither resolved nor addressed by a reply: an **Open Finding**. Also drop it, to avoid re-posting a duplicate of the account's own still-open comment. Keep it in a separate list from Addressed Findings for step 8.
+- Matches a thread that's neither resolved nor addressed by a reply: an **Open Finding**. Also drop it, to avoid re-posting a duplicate of the account's own still-open comment. Keep it in a separate list from Addressed Findings for step 9.
 - Ambiguous match, or no match at all: a **New Finding**. Draft it normally. When in doubt, don't suppress: a missed regression is worse than an occasional duplicate.
 
 Never write to the matched thread itself in this step; Addressed and Open Findings are dropped from this run's draft only, nothing is posted back to the old thread.
@@ -89,11 +89,15 @@ Determine the review event:
 - **`suggested_event: auto`**: zero New Findings (inline or top-level) → `APPROVE`; any hard Standards violation or a missing/wrong Spec requirement among them → `REQUEST_CHANGES`; anything else → `COMMENT`.
 - **A fixed override** (`approve` / `request_changes` / `comment`): use it directly, no computation.
 
-## 8. Draft, then review before touching GitHub
+## 8. Run writing-style
+
+Run the `writing-style` skill over the drafted top-level body and every inline comment before presenting them in the next step.
+
+## 9. Draft, then review before touching GitHub
 
 Present the account it'll post as, the PR, the suggested event, the top-level body, and every inline comment (file, line, side, text). This is what will be posted. Also present, for visibility only and never as part of what gets posted, the Addressed Findings and Open Findings from step 7. A short reference to each old thread is enough, not a full requote. The point is letting the user see what was suppressed and why. Wait for explicit approval before posting anything. If changes are requested, revise and present the full draft again rather than applying part of it. The user can also override the suggested event here regardless of how it was computed.
 
-## 9. Apply
+## 10. Apply
 
 Re-check `gh auth status` for the configured account right now, even though step 4 already checked it. Never trust that earlier check or the user's word at this point. If a different account is currently active, `gh auth switch --user <configured account>`, remembering whichever account was active before.
 

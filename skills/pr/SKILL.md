@@ -26,7 +26,7 @@ Fetch the raw content of the template located in step 1, before drafting anythin
 
 ## 3. Check for an existing PR
 
-Check whether the current branch already has an open PR (`gh pr view`). If one does, this run refreshes it: resolve steps 4 through 7 as usual, then use `gh pr edit` instead of `gh pr create` in step 9, rather than failing on a duplicate-PR error.
+Check whether the current branch already has an open PR (`gh pr view`). If one does, this run refreshes it: resolve steps 4 through 7 as usual, then use `gh pr edit` instead of `gh pr create` in step 10, rather than failing on a duplicate-PR error.
 
 ## 4. Derive the title
 
@@ -54,15 +54,19 @@ For the checklist, tick a line only when its condition is verifiably met:
 - anything about CI checks passing: never tick, CI hasn't run yet at draft time
 - anything else the wording doesn't clearly match one of the above: leave unchecked
 
-## 8. Draft, then review before touching git state
+## 8. Run writing-style
+
+Run the `writing-style` skill over the drafted title and body before presenting them in the next step.
+
+## 9. Draft, then review before touching git state
 
 Present the title, body, base branch, and whether it'll open as a draft: draft if asked for at invocation, otherwise the config's draft-by-default. Wait for explicit approval before pushing or creating anything.
 
-## 9. Apply
+## 10. Apply
 
 Push the branch if it has no upstream yet (`git push -u origin <branch>`), required since `gh pr create` aborts instead of prompting when run non-interactively. Then:
 
-- **New PR** (step 3 found none): `gh pr create --title "<title>" --body-file - --base <target>`, adding `--draft` if step 8 settled on draft, piping the reviewed body in over stdin.
+- **New PR** (step 3 found none): `gh pr create --title "<title>" --body-file - --base <target>`, adding `--draft` if step 9 settled on draft, piping the reviewed body in over stdin.
 - **Existing PR** (step 3 found one): `gh pr edit <number> --title "<title>" --body-file -` instead.
 
 Show the resulting PR URL.
