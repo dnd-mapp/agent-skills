@@ -53,15 +53,19 @@ Add a trailer when one of these applies to the commit:
 - **`DEPRECATED: <what, and the replacement>`**: this commit deprecates a skill, agent, or other behavior.
 - **`Co-authored-by: Name <email>`**: the commit has more than one author.
 
-To find an issue/ticket number: check the current branch name for a plausible reference (e.g. a leading issue number) and, if found, propose it as part of the draft in step 6 rather than asserting it silently; the user confirms or corrects it there. Don't invent a reference that isn't in the branch name or given by the user.
+To find an issue/ticket number: check the current branch name for a plausible reference (e.g. a leading issue number) and, if found, propose it as part of the draft in step 7 rather than asserting it silently; the user confirms or corrects it there. Don't invent a reference that isn't in the branch name or given by the user.
 
 In a multi-commit split, only add a ticket trailer to the commit(s) whose intent actually matches that ticket, not every commit in the group.
 
-## 6. Draft, then review before touching git state
+## 6. Run writing-style
+
+Run the `writing-style` skill over each drafted commit body before presenting the plan in the next step. The subject line's own rules (step 3) already cover its formatting; leave those as they are.
+
+## 7. Draft, then review before touching git state
 
 Present the full plan: each group's files (or hunks) alongside its exact drafted commit message. Wait for explicit approval before running any `git add` or `git commit`. If changes are requested, revise the plan and present it again rather than applying part of it.
 
-## 7. Apply
+## 8. Apply
 
 Once approved, work through the groups in order: stage exactly that group's files or hunks, commit with the reviewed message, then move to the next group. Finish by showing the resulting `git log` so the outcome is visible.
 

@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - `html-outputs` skill: decides whether a spec, plan, report, review, or other rich output should be produced as HTML instead of Markdown, or as a small interactive tool instead of a static document.
 - `writing-style` skill: reviews prose for em dashes and overlong sentences before presenting it as finished, including PR/issue text posted via `gh`.
 
+### Changed
+
+- `pr`, `review-comments`, and `commit` skills now run the `writing-style` skill over their drafted prose (PR title/body, review body and inline comments, commit bodies) before presenting it for review.
+
 ## [1.2.0] - 2026-08-23
 
 ### Changed
