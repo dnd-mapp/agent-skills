@@ -6,10 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-08-25
+
 ### Added
 
-- `html-outputs` skill: decides whether a spec, plan, report, review, or other rich output should be produced as HTML instead of Markdown, or as a small interactive tool instead of a static document.
-- `writing-style` skill: reviews prose for em dashes and overlong sentences before presenting it as finished, including PR/issue text posted via `gh`.
+- `html-outputs` skill: decides whether a spec, plan, report, review, or other rich output should be produced as HTML instead of Markdown, or as a small interactive tool instead of a static document. Registered in the plugin manifest's `skills` list.
+- `writing-style` skill: reviews prose for em dashes and overlong sentences before presenting it as finished, including PR/issue text posted via `gh`. Registered in the plugin manifest's `skills` list.
 
 ### Changed
 
@@ -45,7 +47,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Repo identity (name, description, README, `CONTEXT.md`) updated to reflect its actual purpose: building Agent Skills and Subagent definitions for `dnd-mapp`.
 
-[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.3.0
 [1.2.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.1.0
 [1.0.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.0.0
