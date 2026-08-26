@@ -16,7 +16,7 @@ Read [docs/agents/file-ticket.md](../../docs/agents/file-ticket.md) for this rep
 If that file doesn't exist yet, offer to create it:
 
 - **Target repo**: never ask. Resolve silently via the `resolve-target-repo()` operation (no override, no default) and record the resolved `owner/repo`.
-- **Default labels**: optional. Call `list-labels(repo)` and present the repo's real labels for the user to pick defaults from; accept freeform text too, for a label that doesn't exist in the repo yet. An empty selection records the field as none.
+- **Default labels**: optional. Call `list-labels(repo)` and present the repo's real labels for the user to pick defaults from; accept freeform text too, for a label that doesn't exist in the repo yet. An empty selection records the field as empty.
 - **Tracker**: always ask, via a closed-choice prompt: "Which tracker does this repo use? Currently supported: `github`." Record whatever is answered, even if unsupported.
 
 Present the drafted Target repo, Default labels, and Tracker together for confirmation before writing anything. If changes are requested, revise and present the full draft again. Once confirmed, write the file with just these three fields and ask whether to commit it on the current branch, folded into whatever this session is already about, or on a separate branch as its own PR. Either is legitimate, don't assume.
@@ -36,7 +36,7 @@ Draft a title and body from the current conversation context (the bug, request, 
 Call `fetch-template(repo)`.
 
 - **Zero Candidates**: no template exists; draft the body freeform from step 3.
-- **One Candidate**: fetch its raw content and draft the body to fit its sections (Markdown chooser) or field labels as headings (YAML form), rather than freeform.
+- **One Candidate**: read its raw content and draft the body to fit its sections (Markdown chooser), field labels as headings (YAML form), or existing structure (legacy single-file template, no front matter `name`/`about`), rather than freeform.
 - **Multiple Candidates**: present each Candidate's `name` and `about` to the user, plus a "no template" option, and ask which to use, matching this skill's own draft-and-approve default rather than adding a second, unreviewed guess. This is the only structured signal GitHub itself exposes for choosing between them.
 
 ## 5. Search for duplicates
