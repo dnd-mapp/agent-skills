@@ -1,0 +1,3 @@
+interface:
+    display_name: 'Address Comments'
+    short_description: 'Address existing PR comments with code changes, replies, and resolutions'
