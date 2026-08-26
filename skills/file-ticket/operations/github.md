@@ -43,7 +43,7 @@ EOF
 
 Never pass `--template`: it cannot resolve a YAML form (excluded from the GraphQL field it relies on) and is hard-mutually-exclusive with a supplied `--body`/`--body-file` even for Markdown templates. Always submit a fully-assembled title and body instead. Omit `--label` entirely when `labels` is empty.
 
-## `resolve-target-repo(override?, default) -> {owner, repo}`
+## `resolve-target-repo(override?, default?) -> {owner, repo}`
 
 If `override` is given, validate it:
 
@@ -51,4 +51,16 @@ If `override` is given, validate it:
 gh repo view <override> --json owner,name
 ```
 
-A repo that doesn't exist or isn't accessible surfaces as an error immediately, here, rather than failing confusingly inside `create-ticket`. Without an `override`, use `default` (the config's Target repo) unvalidated. It was already validated when bootstrapped.
+A repo that doesn't exist or isn't accessible surfaces as an error immediately, here, rather than failing confusingly inside `create-ticket`. Without an `override`, use `default` if given (the config's Target repo, already validated when bootstrapped) unvalidated. Without either, infer the current repo the same way:
+
+```bash
+gh repo view --json owner,name
+```
+
+## `list-labels(repo) -> string[]`
+
+```bash
+gh label list --repo <repo> --json name -q '.[].name'
+```
+
+Returns the repo's real label names for the user to pick defaults from during bootstrap. An empty list means the repo has no labels defined.

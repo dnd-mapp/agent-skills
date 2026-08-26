@@ -15,11 +15,11 @@ Read [docs/agents/file-ticket.md](../../docs/agents/file-ticket.md) for this rep
 
 If that file doesn't exist yet, offer to create it:
 
-- **Target repo**: never ask. Infer silently via `gh repo view --json nameWithOwner` and record the resolved `owner/repo`.
-- **Default labels**: optional. Run `gh label list` and present the repo's real labels for the user to pick defaults from; accept freeform text too, for a label that doesn't exist in the repo yet. An empty selection records the field as none.
+- **Target repo**: never ask. Resolve silently via the `resolve-target-repo()` operation (no override, no default) and record the resolved `owner/repo`.
+- **Default labels**: optional. Call `list-labels(repo)` and present the repo's real labels for the user to pick defaults from; accept freeform text too, for a label that doesn't exist in the repo yet. An empty selection records the field as none.
 - **Tracker**: always ask, via a closed-choice prompt: "Which tracker does this repo use? Currently supported: `github`." Record whatever is answered, even if unsupported.
 
-Once confirmed, write the file with just these three fields and ask whether to commit it on the current branch, folded into whatever this session is already about, or on a separate branch as its own PR. Either is legitimate, don't assume.
+Present the drafted Target repo, Default labels, and Tracker together for confirmation before writing anything. If changes are requested, revise and present the full draft again. Once confirmed, write the file with just these three fields and ask whether to commit it on the current branch, folded into whatever this session is already about, or on a separate branch as its own PR. Either is legitimate, don't assume.
 
 Whether just bootstrapped or loaded from an existing file, re-validate the loaded `Tracker` value against the trackers this build ships an operations file for (`skills/file-ticket/operations/<tracker>.md` exists; `github` only, today). If it isn't one of them, surface a loud warning (filing will fail) and stop. Do this on every load, not just at bootstrap, so support landing later clears the warning automatically and a config that regresses catches it again.
 
