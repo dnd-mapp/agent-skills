@@ -14,6 +14,18 @@ _Avoid_: skill file, plugin
 A separately-configured Claude Code agent (own system prompt, tools, model) that the main agent dispatches work to; it runs in an isolated context and reports a result back.\
 _Avoid_: sub-agent, agent (too generic), task
 
+### File Ticket
+
+#### Operation
+
+A named, tracker-agnostic step a skill's `SKILL.md` calls by name (e.g. `resolve-target-repo`, `create-ticket`), whose concrete mechanics live in a per-integration file such as `skills/<name>/operations/<tracker>.md`, selected by the repo's configured tracker.\
+_Avoid_: step, action, command
+
+#### Template Candidate
+
+One issue-template option surfaced when filing a ticket, uniformly shaped (`{name, about, raw content}`) regardless of whether the source is a legacy Markdown template, a Markdown chooser entry, or a YAML issue form.\
+_Avoid_: template
+
 ### Review Comment Dedup
 
 #### Review Thread
