@@ -25,7 +25,7 @@ Whether just bootstrapped or loaded from an existing file, re-validate the loade
 
 ## 2. Resolve the target repo
 
-Optional per-invocation override (a repo named explicitly in conversation). Resolve via the `resolve-target-repo(override?, default)` Operation, `default` being step 1's config value. This validates the target immediately (`gh repo view`) rather than letting a typo surface confusingly later inside ticket creation.
+Optional per-invocation override (a repo named explicitly in conversation). Resolve via the `resolve-target-repo(override?, default?)` Operation, `default` being step 1's config value. This validates the target immediately (`gh repo view`) rather than letting a typo surface confusingly later inside ticket creation.
 
 ## 3. Derive the title and body
 
@@ -37,7 +37,7 @@ Call `fetch-template(repo)`.
 
 - **Zero Candidates**: no Template Candidate exists; draft the body freeform from step 3.
 - **One Candidate**: read its raw content and draft the body to fit its sections (Markdown chooser), field labels as headings (YAML form), or existing structure (legacy single-file template, no front matter `name`/`about`), rather than freeform.
-- **Multiple Candidates**: present each Candidate's `name` and `about` to the user, plus a "no Template Candidate" option, and ask which to use, matching this skill's own draft-and-approve default rather than adding a second, unreviewed guess. This is the only structured signal GitHub itself exposes for choosing between them.
+- **Multiple Candidates**: present each Candidate's `name` and `about` to the user, plus a "no Template Candidate" option, and ask which to use, matching this skill's own draft-and-approve default rather than adding a second, unreviewed guess. This is the only structured signal GitHub itself exposes for choosing between them. The bypass option here is distinct from Zero Candidates above: it covers declining templates GitHub does offer, not their absence.
 
 ## 5. Search for duplicates
 
