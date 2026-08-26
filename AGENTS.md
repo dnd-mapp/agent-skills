@@ -21,3 +21,7 @@ Wayfinder maps and tickets are tracked as local Markdown files. For configuratio
 ## Review comments
 
 Run the `review-comments` skill ([skills/review-comments/SKILL.md](skills/review-comments/SKILL.md)) to draft and post PR review comments. For configuration, see [docs/agents/review-comments.md](docs/agents/review-comments.md).
+
+## Address comments
+
+Run the `address-comments` skill ([skills/address-comments/SKILL.md](skills/address-comments/SKILL.md)) to address existing comments on a pull request - code changes, replies, and resolutions.
