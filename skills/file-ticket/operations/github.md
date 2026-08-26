@@ -21,9 +21,9 @@ Returns 0 or more `{name, about, raw content}` entries, uniformly whether the so
    ```
 
 3. Branch on extension to build each `Template Candidate`:
-   - **`.md`**: parse the YAML front matter for `name` and `about`. `name`/`about` become the candidate's fields; the full raw file (front matter and body together) is the candidate's raw content.
-   - **`.yml` / `.yaml`**: parse the top-level `name` and `description` keys (`description` fills the candidate's `about`). The full raw YAML is the candidate's raw content. `SKILL.md` reads it directly when drafting a body from it; this operation does no field-by-field parsing of the `body` array.
-   - **Legacy single `ISSUE_TEMPLATE.md`** (no chooser directory): one candidate, `name`/`about` both empty, raw content the whole file.
+   - **`.md`**: parse the YAML front matter for `name` and `about`. `name`/`about` become the Candidate's fields; the full raw file (front matter and body together) is the Candidate's raw content.
+   - **`.yml` / `.yaml`**: parse the top-level `name` and `description` keys (`description` fills the Candidate's `about`). The full raw YAML is the Candidate's raw content. `SKILL.md` reads it directly when drafting a body from it; this operation does no field-by-field parsing of the `body` array.
+   - **Legacy single `ISSUE_TEMPLATE.md`** (no chooser directory): one Candidate, `name`/`about` both empty, raw content the whole file.
 
 ## `search-duplicates(repo, query) -> {ok: true, candidates: {number, title, url, state}[]} | {ok: false}`
 
