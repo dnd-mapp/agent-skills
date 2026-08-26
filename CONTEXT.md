@@ -24,7 +24,7 @@ _Avoid_: step, action, command
 #### Template Candidate
 
 One issue-template option surfaced when filing a ticket, uniformly shaped (`{name, about, raw content}`) regardless of whether the source is a legacy Markdown template, a Markdown chooser entry, or a YAML issue form.\
-_Avoid_: template, issue template
+_Avoid_: template
 
 ### Review Comment Dedup
 
