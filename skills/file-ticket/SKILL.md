@@ -7,7 +7,7 @@ description: File a ticket on the repo's issue tracker by drafting a title and b
 
 File a new ticket: derive a title and body from the current conversation, fill in the target repo's issue template if it has one, surface near-duplicate open issues, get your review, then create it and hand back its number and URL.
 
-This skill's flow is tracker-agnostic. Tracker-specific mechanics (the concrete implementation of each operation below) live in `skills/file-ticket/operations/<tracker>.md`, one file per supported tracker, selected by this repo's configured tracker. V1 ships [operations/github.md](operations/github.md) only.
+This skill's flow is tracker-agnostic. Tracker-specific mechanics (the concrete implementation of each Operation below) live in `skills/file-ticket/operations/<tracker>.md`, one file per supported tracker, selected by this repo's configured tracker. V1 ships [operations/github.md](operations/github.md) only.
 
 ## 1. Load or bootstrap the repo config
 
@@ -15,7 +15,7 @@ Read [docs/agents/file-ticket.md](../../docs/agents/file-ticket.md) for this rep
 
 If that file doesn't exist yet, offer to create it:
 
-- **Target repo**: never ask. Resolve silently via the `resolve-target-repo()` operation (no override, no default) and record the resolved `owner/repo`.
+- **Target repo**: never ask. Resolve silently via the `resolve-target-repo()` Operation (no override, no default) and record the resolved `owner/repo`.
 - **Default labels**: optional. Call `list-labels(repo)` and present the repo's real labels for the user to pick defaults from; accept freeform text too, for a label that doesn't exist in the repo yet. An empty selection records the field as empty.
 - **Tracker**: always ask, via a closed-choice prompt: "Which tracker does this repo use? Currently supported: `github`." Record whatever is answered, even if unsupported.
 
@@ -25,7 +25,7 @@ Whether just bootstrapped or loaded from an existing file, re-validate the loade
 
 ## 2. Resolve the target repo
 
-Optional per-invocation override (a repo named explicitly in conversation). Resolve via the `resolve-target-repo(override?, default)` operation, `default` being step 1's config value. This validates the target immediately (`gh repo view`) rather than letting a typo surface confusingly later inside ticket creation.
+Optional per-invocation override (a repo named explicitly in conversation). Resolve via the `resolve-target-repo(override?, default)` Operation, `default` being step 1's config value. This validates the target immediately (`gh repo view`) rather than letting a typo surface confusingly later inside ticket creation.
 
 ## 3. Derive the title and body
 
