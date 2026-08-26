@@ -21,8 +21,6 @@ pnpm install
 
 New skills live at `skills/<name>/SKILL.md`. Frontmatter needs a `name` and `description`; add `disable-model-invocation: true` if the skill should only run when explicitly invoked (see [`skills/ship/SKILL.md`](skills/ship/SKILL.md) for a working example). Otherwise, write the description so an agent can tell when to invoke it on its own: state what the skill does, then when to use it (see [`skills/commit/SKILL.md`](skills/commit/SKILL.md)). Keep terminology consistent with [CONTEXT.md](CONTEXT.md) ("Agent Skill", not "skill file" or "plugin"). Add the new skill to the [Available skills](README.md#available-skills) table in `README.md` so it's discoverable.
 
-If a skill needs per-integration mechanics (a different tracker, provider, or backend per repo), bundle one file per integration under `skills/<name>/operations/<integration>.md` rather than growing a single mega-doc; the skill's `SKILL.md` stays integration-agnostic and calls out to the file selected by the repo's config (see [`skills/file-ticket/SKILL.md`](skills/file-ticket/SKILL.md) and [`skills/file-ticket/operations/github.md`](skills/file-ticket/operations/github.md)). If the skill also needs per-repo bootstrap config (target repo, credentials, defaults), keep that in `docs/agents/<name>.md`, separate from the operations files.
-
 If you're using Claude Code, the `writing-for-agents` skill covers conventions for authoring `SKILL.md`, `AGENTS.md`, and `CLAUDE.md` files.
 
 ## Style and validation
