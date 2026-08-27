@@ -68,7 +68,9 @@ Keep threads where `isResolved` is `false`, regardless of author. A thread opene
 
 Drop a thread that already has a reply from the current `gh` identity (`gh api user --jq .login`) that you judge as addressing the point. This is the same reading-comprehension standard the general PR comments below get. It stops a re-run from re-drafting a reply for a thread handled on an earlier run. A **Reply only** thread stays open (step 4), so without this check it would return as a Candidate every run.
 
-`--paginate` walks `reviewThreads` for a PR with more than 100 threads: the query declares `$endCursor` and `gh` feeds the cursor back on each page. `gh` reads only the first `pageInfo` in the response, so `reviewThreads` keeps its `pageInfo` ahead of `nodes` and the nested `comments.pageInfo` is never taken for the outer cursor. This skill reads that nested `pageInfo` itself: for the rare thread that holds more than 100 comments (its `comments.pageInfo.hasNextPage` is `true`), fetch the rest with a follow-up query keyed by the thread `id`:
+`--paginate` walks `reviewThreads` for a PR with more than 100 threads: the query declares `$endCursor` and `gh` feeds the cursor back on each page. `gh` follows only the first `pageInfo` in the response. `reviewThreads.pageInfo` sits ahead of its `nodes`, so `gh` never mistakes the nested `comments.pageInfo` for the outer cursor.
+
+This skill reads that nested `pageInfo` itself. A thread that holds more than 100 comments has `comments.pageInfo.hasNextPage` set to `true`. Fetch the rest of its comments with a follow-up query keyed by the thread `id`:
 
 ```bash
 gh api graphql --paginate -f query='
