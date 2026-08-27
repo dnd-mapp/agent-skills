@@ -24,4 +24,4 @@ Run the `review-comments` skill ([skills/review-comments/SKILL.md](skills/review
 
 ## Address comments
 
-Run the `address-comments` skill ([skills/address-comments/SKILL.md](skills/address-comments/SKILL.md)) to work through unresolved review threads and unaddressed PR comments with code changes, replies, and resolutions.
+Run the `address-comments` skill ([skills/address-comments/SKILL.md](skills/address-comments/SKILL.md)) to work through unresolved review threads and unaddressed PR comments with code changes, replies, and resolutions. It has no configuration file. The PR author runs it on their own PR, so replies and resolutions post as the active `gh` account rather than a configured bot.
