@@ -127,7 +127,7 @@ Check `gh auth status` first. Every step below pushes or posts as the active `gh
 
 Then, in order:
 
-1. Make every approved code change in the workspace from step 2.
+1. Make every approved code change in the workspace from step 2. If no Candidate was a **Code change**, skip to step 7.4: nothing needs committing or pushing.
 2. Run `/commit` to commit them.
 3. Push with a plain `git push`, whichever setup step 2 used. A direct `git checkout` tracks the branch's remote, and `gh pr checkout` in the worktree configures the branch's upstream and push target (the fork's, for a cross-repository PR). This must land before any reply below references it.
 4. Run `/file-ticket` once for every Candidate marked **Follow-up ticket**. Each keeps its own draft-and-approve gate, the same way `/ship` sequences `/branch`, `/commit`, and `/pr` without adding a second gate on top. Note the issue number and URL each run produces.
