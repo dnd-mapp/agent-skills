@@ -5,7 +5,7 @@ description: Address existing comments on a pull request (review threads and gen
 
 # Address Comments
 
-Go through every unresolved review thread and unaddressed general PR comment on a pull request. For each, decide on one Treatment: a code change, a reply, a follow-up ticket, or no action. Draft a combined plan, get your review, and then:
+Go through every unresolved review thread and unaddressed general PR comment on a pull request. For each, decide on one Treatment: a code change, a reply only, a follow-up ticket, or no action needed. Draft a combined plan, get your review, and then:
 
 - Make the approved code changes, then commit and push them.
 - File any follow-up tickets.
