@@ -129,7 +129,7 @@ Then, in order:
 
 1. Make every approved code change in the workspace from step 2. If no Candidate was a **Code change**, skip to step 7.4: nothing needs committing or pushing.
 2. Run `/commit` to commit them.
-3. Push with a plain `git push`, whichever setup step 2 used. A direct `git checkout` tracks the branch's remote, and `gh pr checkout` in the worktree configures the branch's upstream and push target (the fork's, for a cross-repository PR). This must land before any reply below references it.
+3. Push with a plain `git push`, whichever setup step 2 used. A direct `git checkout` tracks the branch's remote, and `gh pr checkout` in the worktree configures the branch's upstream and push target (the fork's, for a cross-repository PR). If the local branch tracks nothing, push with `git push -u origin <headRefName>` instead. This must land before any reply below references it.
 4. Run `/file-ticket` once for every Candidate marked **Follow-up ticket**. Each keeps its own draft-and-approve gate, the same way `/ship` sequences `/branch`, `/commit`, and `/pr` without adding a second gate on top. Note the issue number and URL each run produces.
 5. Post every drafted reply. A **No action needed** Candidate has none, so nothing posts for it. For a **Follow-up ticket** reply, replace the step 4 placeholder with the real issue number and URL first:
    - Review thread: `gh api repos/<owner>/<repo>/pulls/<number>/comments/<comment_id>/replies --method POST -f body='<reply>'`, `<comment_id>` being the `databaseId` of the thread's first comment.
