@@ -47,3 +47,15 @@ _Avoid_: duplicate finding, repeat finding
 
 A finding with no matching prior Review Thread from the bot. Drafted as a fresh inline comment, same as today's behavior.\
 _Avoid_: fresh finding
+
+### Address Comments
+
+#### Candidate
+
+An unresolved review thread or an unaddressed general PR comment, carried through the `address-comments` skill as one unit to be given a Treatment.\
+_Avoid_: comment, item, finding
+
+#### Treatment
+
+The single decision made for one Candidate: a code change, a reply only, a follow-up ticket, or no action needed. Exactly one per Candidate, recorded in the plan even when it is "no action needed".\
+_Avoid_: resolution, disposition, outcome

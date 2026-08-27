@@ -24,4 +24,4 @@ Run the `review-comments` skill ([skills/review-comments/SKILL.md](skills/review
 
 ## Address comments
 
-Run the `address-comments` skill ([skills/address-comments/SKILL.md](skills/address-comments/SKILL.md)) to address existing comments on a pull request - code changes, replies, and resolutions.
+Run the `address-comments` skill ([skills/address-comments/SKILL.md](skills/address-comments/SKILL.md)) to work through unresolved review threads and unaddressed PR comments with code changes, replies, and resolutions.
