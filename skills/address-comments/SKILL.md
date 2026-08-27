@@ -83,7 +83,9 @@ Present the plan. Wait for explicit approval before touching the working tree, t
 
 ## 7. Apply
 
-In order:
+Check `gh auth status` first. Every step below pushes or posts as the active `gh` account: the push, the follow-up tickets, the replies, and the thread resolutions. Surface a warning and stop if it isn't authenticated, or if the active account isn't the one the user wants to act as.
+
+Then, in order:
 
 1. Make every approved code change in the workspace from step 2.
 2. Run `/commit` to commit them.
