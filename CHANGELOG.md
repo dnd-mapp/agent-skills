@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- `address-comments` skill: works through unresolved review threads and unaddressed general PR comments on a pull request, applying a reviewed plan of code changes, replies, follow-up tickets, and thread resolutions.
+
 ## [1.3.0] - 2026-08-25
 
 ### Added
