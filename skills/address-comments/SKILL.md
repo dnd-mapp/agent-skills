@@ -94,15 +94,15 @@ The Treatments:
 - **Code change**: draft the change. In scope because the diff already touches the area, or because the fix is small enough that the extra scope isn't a real cost.
 - **Reply only**: acknowledgment, disagreement, a clarifying question, or something already true. No code change.
 - **Follow-up ticket**: the request is valid but belongs outside this PR: different files, unrelated behavior, or a change disproportionate to the PR's purpose. Runs through `/file-ticket` in step 7 instead of a code change here.
-- **No action needed**: nothing to respond to. Outdated (superseded by a later commit), already resolved by something else in this run, or not actually actionable. A thread the step 3 query returned with `isOutdated: true` is a strong hint here, but confirm it against the diff first: `isOutdated` only means the anchored line moved, not that the point was handled. Still goes in the plan in step 5 with a one-line reason, so nothing silently drops.
+- **No action needed**: nothing to respond to. Outdated (superseded by a later commit), already resolved by something else in this run, or not actually actionable. A thread the step 3 query returned with `isOutdated: true` is a strong hint here, but confirm it against the diff first: `isOutdated` only means the anchored line moved, not that the point was handled. Still goes in the plan in step 5 with a one-line reason, so nothing silently drops. Draft no reply for it, and step 7.5 posts nothing for it.
 
 A review thread resolves only when the Treatment fully satisfies it: a **Code change** that answers the comment, or a **Follow-up ticket** filed for it. **Reply only** never resolves the thread, including a pushback or clarifying reply. Leave it open for the reviewer to close.
 
-Draft each reply now. A reply to a general comment quotes the original text it's responding to, since nothing in the UI otherwise ties them together. A reply to a review thread doesn't, since GitHub already anchors it inline. A reply for a **Follow-up ticket** Candidate names the issue it will cite with a placeholder, since the issue doesn't exist until step 7.4. Step 7.5 splices in the real number and URL before posting.
+Draft each reply now, for every Candidate except **No action needed**. A reply to a general comment quotes the original text it's responding to, since nothing in the UI otherwise ties them together. A reply to a review thread doesn't, since GitHub already anchors it inline. A reply for a **Follow-up ticket** Candidate names the issue it will cite with a placeholder, since the issue doesn't exist until step 7.4. Step 7.5 splices in the real number and URL before posting.
 
 ## 5. Draft the plan
 
-One combined plan covering every Candidate from step 4, in prose: no edits, no tickets, nothing posted yet. For each: its source (thread at `path:line`, or the general comment), the Treatment, the drafted reply, and whether it resolves. Group by Treatment or by file, whichever reads clearer for the number of Candidates in this run.
+One combined plan covering every Candidate from step 4, in prose: no edits, no tickets, nothing posted yet. For each: its source (thread at `path:line`, or the general comment), the Treatment, the drafted reply if any, and whether it resolves. A **No action needed** Candidate lists its one-line reason and nothing else. Group by Treatment or by file, whichever reads clearer for the number of Candidates in this run.
 
 Run the `writing-style` skill over every drafted reply before presenting the plan. Step 7.5 posts them through `gh`, and `writing-style` is the only review pass that path gets.
 
@@ -120,7 +120,7 @@ Then, in order:
 2. Run `/commit` to commit them.
 3. Push with a plain `git push`, whichever setup step 2 used. A direct `git checkout` tracks the branch's remote, and `gh pr checkout` in the worktree configures the branch's upstream and push target (the fork's, for a cross-repository PR). This must land before any reply below references it.
 4. Run `/file-ticket` once for every Candidate marked **Follow-up ticket**. Each keeps its own draft-and-approve gate, the same way `/ship` sequences `/branch`, `/commit`, and `/pr` without adding a second gate on top. Note the issue number and URL each run produces.
-5. Post every drafted reply. For a **Follow-up ticket** reply, replace the step 4 placeholder with the real issue number and URL first:
+5. Post every drafted reply. A **No action needed** Candidate has none, so nothing posts for it. For a **Follow-up ticket** reply, replace the step 4 placeholder with the real issue number and URL first:
    - Review thread: `gh api repos/<owner>/<repo>/pulls/<number>/comments/<comment_id>/replies --method POST -f body='<reply>'`, `<comment_id>` being the `databaseId` of the thread's first comment.
    - General comment: `gh api repos/<owner>/<repo>/issues/<number>/comments --method POST -f body='<reply>'`.
 6. Resolve every thread marked for resolution:
