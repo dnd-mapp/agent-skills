@@ -90,7 +90,7 @@ Keep two IDs per thread. The thread-level `id` on `reviewThreads.nodes` is the G
 
 Fetch general PR comments too: `gh api --paginate repos/<owner>/<repo>/issues/<number>/comments` (without `--paginate` this returns only the first 30). Read them in order. Drop a comment if a later comment from the current `gh` identity (`gh api user --jq .login`) already answers it. Judge this by reading comprehension, never by matching nearby wording. This is the same standard `/review-comments` step 7 applies to its own dedup.
 
-Fetch review summary bodies too: `gh api --paginate repos/<owner>/<repo>/pulls/<number>/reviews`. Keep each review whose `body` is non-empty and whose `state` is neither `PENDING` nor `DISMISSED`. A dismissed review's summary was explicitly set aside, so it is not feedback the author still needs to address. This is the top-level text submitted with a review, which is neither a thread nor an issue comment, so nothing else here picks it up. Dedup it the same way as a general PR comment, and treat its reply like one in steps 4, 5, and 7.5.
+Fetch review summary bodies too: `gh api --paginate repos/<owner>/<repo>/pulls/<number>/reviews`. Keep each review whose `body` is non-empty and whose `state` is neither `PENDING` nor `DISMISSED`. A dismissed review's summary was explicitly set aside, so it is not feedback the author still needs to address. This is the top-level text submitted with a review, which is neither a thread nor an issue comment, so nothing else here picks it up. Dedup it like a general PR comment, ordering it against the issue comments by timestamp. The two run on separate timelines, so when that ordering is ambiguous, let step 4's diff read decide. Treat its reply like a general PR comment's in steps 4, 5, and 7.5.
 
 Everything remaining (unresolved threads, unaddressed general PR comments, and unaddressed review summaries) is a Candidate for step 4.
 
@@ -113,7 +113,14 @@ Draft each reply now, for every Candidate except **No action needed**. A reply t
 
 ## 5. Draft the plan
 
-One combined plan covering every Candidate from step 4, in prose: no edits, no tickets, nothing posted yet. For each: its source (thread at `path:line`, the general PR comment, or the review summary), the Treatment, the drafted reply if any, and whether it resolves. A **No action needed** Candidate lists its one-line reason and nothing else. Group by Treatment or by file, whichever reads clearer for the number of Candidates in this run.
+One combined plan covering every Candidate from step 4, in prose: no edits, no tickets, nothing posted yet. For each Candidate, give:
+
+- its source: the thread at `path:line` (or just `path` when GitHub reports `line` as null on an outdated thread), the general PR comment, or the review summary
+- the Treatment
+- the drafted reply, if any
+- whether it resolves the thread
+
+A **No action needed** Candidate lists its one-line reason and nothing else. Group by Treatment or by file, whichever reads clearer for the number of Candidates in this run.
 
 Run the `writing-style` skill over every drafted reply before presenting the plan. Step 7.5 posts them through `gh`, and `writing-style` is the only review pass that path gets.
 
