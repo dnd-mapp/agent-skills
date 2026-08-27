@@ -27,6 +27,7 @@ Work on the PR's actual branch, since this skill edits files and pushes. Check w
 - **Doesn't exist locally** (never fetched, or a fork PR):
   - Create a throwaway worktree with `git worktree add --detach <path>`. The `--detach` stops `git worktree add` from leaving a stray branch behind. Put `<path>` in a scratch or temp directory named distinctly per PR, e.g. a `pr-<number>` subdirectory.
   - Run `gh pr checkout <number>` inside it. This fetches the branch and configures its upstream and push target the way an interactive checkout would, for a same-repo PR and a fork PR alike. A plain `git push` in step 7.3 then lands on the right repo and branch.
+  - Run the rest of this skill from inside the worktree, steps 4 and 7 included, so `/commit` and `git push` act on it and not the user's main checkout.
   - Tear the worktree down once you no longer need it, regardless of outcome: step 7 finished, step 3 found no candidates, or the user rejected the plan at step 6.
   - Run `git worktree remove <path>` (`--force` once for a dirty worktree, twice for a locked one). If that fails or leaves dangling metadata, run `git worktree remove --force <path>` followed by `git worktree prune -v`.
 
@@ -47,7 +48,7 @@ gh api graphql -f query='
             isOutdated
             comments(first: 100) {
               pageInfo { hasNextPage endCursor }
-              nodes { id databaseId author { login } body path line createdAt }
+              nodes { databaseId author { login } body path line createdAt }
             }
           }
         }
@@ -58,7 +59,7 @@ gh api graphql -f query='
 
 Keep threads where `isResolved` is `false`, regardless of author. A thread opened by a bot (this repo's own `review-comments` account included) is as much a Candidate as one opened by a human. Follow the `pageInfo` cursors while `hasNextPage` is true, on `reviewThreads` for a PR with more than 100 threads and on `comments` for a thread with more than 100 comments.
 
-Each comment carries two IDs. `id` is the GraphQL node ID, used by `resolveReviewThread` in step 7.6. `databaseId` is the numeric REST ID, used by the reply call in step 7.5. Keep both.
+Keep two IDs per thread. The thread-level `id` on `reviewThreads.nodes` is the GraphQL node ID that step 7.6 passes to `resolveReviewThread`. Each comment's `databaseId` is the numeric REST ID, and step 7.5's reply call takes the `databaseId` of the thread's first comment.
 
 Fetch general conversation comments too: `gh api --paginate repos/<owner>/<repo>/issues/<number>/comments` (without `--paginate` this returns only the first 30). Read them in order. Drop a comment if a later comment from the current `gh` identity (`gh api user --jq .login`) already answers it. Judge this by reading comprehension, never by matching nearby wording. This is the same standard `/review-comments` step 7 applies to its own dedup.
 
