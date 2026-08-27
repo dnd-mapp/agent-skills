@@ -52,7 +52,7 @@ _Avoid_: fresh finding
 
 #### Candidate
 
-An unresolved review thread or an unaddressed general PR comment, carried through the `address-comments` skill as one unit to be given a Treatment.\
+An unresolved review thread, an unaddressed general PR comment, or an unaddressed review summary, carried through the `address-comments` skill as one unit to be given a Treatment.\
 _Avoid_: comment, item, finding
 
 #### Treatment

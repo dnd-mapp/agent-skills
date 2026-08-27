@@ -1,11 +1,11 @@
 ---
 name: address-comments
-description: Address existing comments on a pull request (review threads and general PR comments) with code changes, replies, and thread resolutions. The plan is reviewed with you before anything is applied. Use when the user wants to respond to or resolve outstanding PR feedback, or when another skill needs a PR's comments addressed.
+description: Address existing comments on a pull request (review threads, general PR comments, and review summaries) with code changes, replies, and thread resolutions. The plan is reviewed with you before anything is applied. Use when the user wants to respond to or resolve outstanding PR feedback, or when another skill needs a PR's comments addressed.
 ---
 
 # Address Comments
 
-Go through every unresolved review thread and unaddressed general PR comment on a pull request. For each, decide on one Treatment: a code change, a reply only, a follow-up ticket, or no action needed. Draft a combined plan, get your review, and then:
+Go through every unresolved review thread, unaddressed general PR comment, and unaddressed review summary on a pull request. For each, decide on one Treatment: a code change, a reply only, a follow-up ticket, or no action needed. Draft a combined plan, get your review, and then:
 
 - Make the approved code changes, then commit and push them.
 - File any follow-up tickets.
