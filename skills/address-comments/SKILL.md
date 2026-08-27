@@ -50,7 +50,7 @@ gh api graphql --paginate -f query='
             isOutdated
             comments(first: 100) {
               pageInfo { hasNextPage endCursor }
-              nodes { databaseId author { login } body path line createdAt }
+              nodes { databaseId author { login } body path line }
             }
           }
         }
@@ -59,7 +59,7 @@ gh api graphql --paginate -f query='
   }' -f owner=<owner> -f repo=<repo> -F number=<number>
 ```
 
-Keep threads where `isResolved` is `false`, regardless of author. A thread opened by a bot (this repo's own `review-comments` account included) is as much a Candidate as one opened by a human.
+Keep threads where `isResolved` is `false`, regardless of author. A thread opened by a bot (this repo's own `review-comments` account included) is as much a Candidate as one opened by a human. Read each comment's `author` alongside its `body` when working the thread in step 4, so a back-and-forth reads in order.
 
 `--paginate` walks `reviewThreads` for a PR with more than 100 threads: the query declares `$endCursor` and `gh` feeds the cursor back on each page. For the rare thread that itself holds more than 100 comments (its `comments.pageInfo.hasNextPage` is `true`), fetch the rest with a follow-up query keyed by the thread `id`:
 
@@ -70,7 +70,7 @@ gh api graphql --paginate -f query='
       ... on PullRequestReviewThread {
         comments(first: 100, after: $endCursor) {
           pageInfo { hasNextPage endCursor }
-          nodes { databaseId author { login } body path line createdAt }
+          nodes { databaseId author { login } body path line }
         }
       }
     }
@@ -94,7 +94,7 @@ The Treatments:
 - **Code change**: draft the change. In scope because the diff already touches the area, or because the fix is small enough that the extra scope isn't a real cost.
 - **Reply only**: acknowledgment, disagreement, a clarifying question, or something already true. No code change.
 - **Follow-up ticket**: the request is valid but belongs outside this PR: different files, unrelated behavior, or a change disproportionate to the PR's purpose. Runs through `/file-ticket` in step 7 instead of a code change here.
-- **No action needed**: nothing to respond to. Outdated (superseded by a later commit), already resolved by something else in this run, or not actually actionable. Still goes in the plan in step 5 with a one-line reason, so nothing silently drops.
+- **No action needed**: nothing to respond to. Outdated (superseded by a later commit), already resolved by something else in this run, or not actually actionable. A thread the step 3 query returned with `isOutdated: true` is a strong hint here, but confirm it against the diff first: `isOutdated` only means the anchored line moved, not that the point was handled. Still goes in the plan in step 5 with a one-line reason, so nothing silently drops.
 
 A review thread resolves only when the Treatment fully satisfies it: a **Code change** that answers the comment, or a **Follow-up ticket** filed for it. **Reply only** never resolves the thread, including a pushback or clarifying reply. Leave it open for the reviewer to close.
 
