@@ -30,11 +30,13 @@ gh api graphql -f query='
     repository(owner: $owner, name: $repo) {
       pullRequest(number: $number) {
         reviewThreads(first: 100) {
+          pageInfo { hasNextPage endCursor }
           nodes {
             id
             isResolved
             isOutdated
             comments(first: 100) {
+              pageInfo { hasNextPage endCursor }
               nodes { id databaseId author { login } body path line createdAt }
             }
           }
@@ -44,7 +46,7 @@ gh api graphql -f query='
   }' -f owner=<owner> -f repo=<repo> -F number=<number>
 ```
 
-Keep threads where `isResolved` is `false`, regardless of author. A thread opened by a bot (this repo's own `review-comments` account included) is as much a Candidate as one opened by a human. Paginate if the PR has more than 100 threads or a thread has more than 100 comments.
+Keep threads where `isResolved` is `false`, regardless of author. A thread opened by a bot (this repo's own `review-comments` account included) is as much a Candidate as one opened by a human. Follow the `pageInfo` cursors while `hasNextPage` is true, on `reviewThreads` for a PR with more than 100 threads and on `comments` for a thread with more than 100 comments.
 
 Each comment carries two IDs. `id` is the GraphQL node ID, used by `resolveReviewThread` in step 7.6. `databaseId` is the numeric REST ID, used by the reply call in step 7.5. Keep both.
 
