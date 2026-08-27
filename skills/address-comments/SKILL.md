@@ -29,7 +29,7 @@ Work on the PR's actual branch, since this skill edits files and pushes. Check w
   - `git checkout <headRefName>`, then `git fetch origin <headRefName>` and compare `HEAD` against `origin/<headRefName>`.
   - If `origin/<headRefName>` has commits `HEAD` lacks, `git merge --ff-only origin/<headRefName>`. Stop if the histories have diverged, since step 7.3's push would be rejected.
   - Otherwise `HEAD` is level with or ahead of `origin/<headRefName>`. Proceed, and work here directly for the rest of this skill.
-  - If `git checkout` moved the user off another branch, tell them they were left on `<headRefName>`. Say it on whichever path ends the run: the step 7 summary, or an earlier stop (no Candidates in step 3, a rejected plan in step 6, diverged histories above). Don't switch them back on their behalf.
+  - If `git checkout` moved the user off another branch, tell them they were left on `<headRefName>`. Say it on whichever path ends the run: the step 7 summary, or any earlier stop. Don't switch them back on their behalf.
 - **Doesn't exist locally** (never fetched, or a fork PR):
   - Create a throwaway worktree with `git worktree add --detach <path>`. The `--detach` stops `git worktree add` from leaving a stray branch behind. Put `<path>` in a scratch or temp directory named distinctly per PR, e.g. a `pr-<number>` subdirectory.
   - Run `gh pr checkout <number>` inside it. This fetches the branch and configures its upstream and push target the way an interactive checkout would, for a same-repo PR and a fork PR alike. A plain `git push` in step 7.3 then lands on the right repo and branch.
