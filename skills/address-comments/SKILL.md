@@ -36,11 +36,11 @@ Work on the PR's actual branch, since this skill edits files and pushes. Check w
 Fetch every review thread via GraphQL:
 
 ```bash
-gh api graphql -f query='
-  query($owner: String!, $repo: String!, $number: Int!) {
+gh api graphql --paginate -f query='
+  query($owner: String!, $repo: String!, $number: Int!, $endCursor: String) {
     repository(owner: $owner, name: $repo) {
       pullRequest(number: $number) {
-        reviewThreads(first: 100) {
+        reviewThreads(first: 100, after: $endCursor) {
           pageInfo { hasNextPage endCursor }
           nodes {
             id
@@ -57,7 +57,23 @@ gh api graphql -f query='
   }' -f owner=<owner> -f repo=<repo> -F number=<number>
 ```
 
-Keep threads where `isResolved` is `false`, regardless of author. A thread opened by a bot (this repo's own `review-comments` account included) is as much a Candidate as one opened by a human. Follow the `pageInfo` cursors while `hasNextPage` is true, on `reviewThreads` for a PR with more than 100 threads and on `comments` for a thread with more than 100 comments.
+Keep threads where `isResolved` is `false`, regardless of author. A thread opened by a bot (this repo's own `review-comments` account included) is as much a Candidate as one opened by a human.
+
+`--paginate` walks `reviewThreads` for a PR with more than 100 threads: the query declares `$endCursor` and `gh` feeds the cursor back on each page. For the rare thread that itself holds more than 100 comments (its `comments.pageInfo.hasNextPage` is `true`), fetch the rest with a follow-up query keyed by the thread `id`:
+
+```bash
+gh api graphql --paginate -f query='
+  query($threadId: ID!, $endCursor: String) {
+    node(id: $threadId) {
+      ... on PullRequestReviewThread {
+        comments(first: 100, after: $endCursor) {
+          pageInfo { hasNextPage endCursor }
+          nodes { databaseId author { login } body path line createdAt }
+        }
+      }
+    }
+  }' -f threadId=<thread_id>
+```
 
 Keep two IDs per thread. The thread-level `id` on `reviewThreads.nodes` is the GraphQL node ID that step 7.6 passes to `resolveReviewThread`. Each comment's `databaseId` is the numeric REST ID, and step 7.5's reply call takes the `databaseId` of the thread's first comment.
 
