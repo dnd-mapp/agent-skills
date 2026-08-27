@@ -15,9 +15,9 @@ Go through every unresolved review thread and unaddressed conversation comment o
 
 Optional PR number/URL argument; default to the current branch's open PR (`gh pr view`), the same convention `/pr` and `/review-comments` use. Stop with a clear message if neither is given and none is found.
 
-Gather `number`, `baseRefName`, and `headRefName` via `gh pr view <number> --json number,baseRefName,headRefName`.
+Gather `number`, `baseRefName`, `headRefName`, and `url` via `gh pr view <number> --json number,baseRefName,headRefName,url`.
 
-The `<owner>` and `<repo>` interpolated into the queries and API calls below are the PR's base repository, read from `gh repo view --json owner,name`. The review threads, replies, and thread resolutions all live on the base repo, even for a fork PR.
+The `<owner>` and `<repo>` interpolated into the queries and API calls below come from `url`, which is `https://github.com/<owner>/<repo>/pull/<number>`. `gh pr view` resolves against the PR's base repository, so this stays correct even for a fork PR. In a fork clone `gh repo view` would return the fork instead. The review threads, replies, and thread resolutions all live on the base repo.
 
 ## 2. Set up the workspace
 
@@ -26,9 +26,9 @@ Work on the PR's actual branch, since this skill edits files and pushes. Check w
 - **Exists locally**:
   - If the working tree isn't clean (`git status --porcelain`), stop and tell the user to commit or stash before re-running. Never stash or switch branches on their behalf.
   - Record the branch the user is currently on.
-  - `git checkout <headRefName>`, then `git fetch` and compare `HEAD` against its upstream.
-  - If the upstream has commits `HEAD` lacks, `git merge --ff-only`. Stop if the histories have diverged, since step 7.3's push would be rejected.
-  - Otherwise `HEAD` is level with or ahead of the upstream. Proceed, and work here directly for the rest of this skill.
+  - `git checkout <headRefName>`, then `git fetch origin <headRefName>` and compare `HEAD` against `origin/<headRefName>`.
+  - If `origin/<headRefName>` has commits `HEAD` lacks, `git merge --ff-only origin/<headRefName>`. Stop if the histories have diverged, since step 7.3's push would be rejected.
+  - Otherwise `HEAD` is level with or ahead of `origin/<headRefName>`. Proceed, and work here directly for the rest of this skill.
   - If `git checkout` moved the user off another branch, the step 7 summary must say they were left on `<headRefName>`. Don't switch them back on their behalf.
 - **Doesn't exist locally** (never fetched, or a fork PR):
   - Create a throwaway worktree with `git worktree add --detach <path>`. The `--detach` stops `git worktree add` from leaving a stray branch behind. Put `<path>` in a scratch or temp directory named distinctly per PR, e.g. a `pr-<number>` subdirectory.
