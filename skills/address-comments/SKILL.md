@@ -63,7 +63,7 @@ Read every Candidate against `git diff <baseRefName>...HEAD` in the workspace fr
 
 A review thread resolves only when the Treatment fully satisfies it: a **Code change** that answers the comment, or a **Follow-up ticket** filed for it. **Reply only** never resolves the thread, including a pushback or clarifying reply. Leave it open for the reviewer to close.
 
-Draft each reply now. A reply to a general comment quotes the original text it's responding to, since nothing in the UI otherwise ties them together. A reply to a review thread doesn't, since GitHub already anchors it inline.
+Draft each reply now. A reply to a general comment quotes the original text it's responding to, since nothing in the UI otherwise ties them together. A reply to a review thread doesn't, since GitHub already anchors it inline. A reply for a **Follow-up ticket** Candidate names the issue it will cite with a placeholder, since the issue doesn't exist until step 7.4; step 7.5 splices the real number and URL in before posting.
 
 ## 5. Draft the plan
 
@@ -82,8 +82,8 @@ In order:
 1. Make every approved code change in the workspace from step 2.
 2. Run `/commit` to commit them.
 3. Push with a plain `git push`, whichever setup step 2 used. A direct `git checkout` tracks the branch's remote, and `gh pr checkout` in the worktree configures the branch's upstream and push target (the fork's, for a cross-repository PR). This must land before any reply below references it.
-4. Run `/file-ticket` once for every Candidate marked **Follow-up ticket**. Each keeps its own draft-and-approve gate, the same way `/ship` sequences `/branch`, `/commit`, and `/pr` without adding a second gate on top.
-5. Post every drafted reply:
+4. Run `/file-ticket` once for every Candidate marked **Follow-up ticket**. Each keeps its own draft-and-approve gate, the same way `/ship` sequences `/branch`, `/commit`, and `/pr` without adding a second gate on top. Note the issue number and URL each run produces.
+5. Post every drafted reply. For a **Follow-up ticket** reply, replace the step 4 placeholder with the real issue number and URL first:
    - Review thread: `gh api repos/<owner>/<repo>/pulls/<number>/comments/<comment_id>/replies --method POST -f body='<reply>'`, `<comment_id>` being the `databaseId` of the thread's first comment.
    - General comment: `gh api repos/<owner>/<repo>/issues/<number>/comments --method POST -f body='<reply>'`.
 6. Resolve every thread marked for resolution:
