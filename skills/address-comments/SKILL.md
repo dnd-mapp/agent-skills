@@ -13,6 +13,8 @@ Optional PR number/URL argument; default to the current branch's open PR (`gh pr
 
 Gather `number`, `baseRefName`, and `headRefName` via `gh pr view <number> --json number,baseRefName,headRefName`.
 
+The `<owner>` and `<repo>` interpolated into the queries and API calls below are the PR's base repository, read from `gh repo view --json owner,name`. The review threads, replies, and thread resolutions all live on the base repo, even for a fork PR.
+
 ## 2. Set up the workspace
 
 Work on the PR's actual branch, since this skill edits files and pushes. Check whether `headRefName` exists as a local branch (`git branch --list <headRefName>`):
