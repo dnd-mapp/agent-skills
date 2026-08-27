@@ -134,7 +134,7 @@ Then, in order:
 5. Post every drafted reply. A **No action needed** Candidate has none, so nothing posts for it. For a **Follow-up ticket** reply, replace the step 4 placeholder with the real issue number and URL first:
    - Review thread: `gh api repos/<owner>/<repo>/pulls/<number>/comments/<comment_id>/replies --method POST -f body='<reply>'`, `<comment_id>` being the `databaseId` of the thread's first comment.
    - General PR comment or review summary: `gh api repos/<owner>/<repo>/issues/<number>/comments --method POST -f body='<reply>'`.
-6. Resolve every thread marked for resolution:
+6. Resolve every thread marked for resolution. Skip any thread whose step 7.5 reply failed to post, so a thread is never left resolved without its reply.
 
    ```bash
    gh api graphql -f query='
