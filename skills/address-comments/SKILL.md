@@ -88,7 +88,7 @@ Keep two IDs per thread. The thread-level `id` on `reviewThreads.nodes` is the G
 
 Fetch general PR comments too: `gh api --paginate repos/<owner>/<repo>/issues/<number>/comments` (without `--paginate` this returns only the first 30). Read them in order. Drop a comment if a later comment from the current `gh` identity (`gh api user --jq .login`) already answers it. Judge this by reading comprehension, never by matching nearby wording. This is the same standard `/review-comments` step 7 applies to its own dedup.
 
-Fetch review summary bodies too: `gh api --paginate repos/<owner>/<repo>/pulls/<number>/reviews`. Keep each review whose `body` is non-empty and whose `state` is not `PENDING`. This is the top-level text submitted with a review, which is neither a thread nor an issue comment, so nothing else here picks it up. Dedup it the same way as a general PR comment, and treat its reply like one in steps 4, 5, and 7.5.
+Fetch review summary bodies too: `gh api --paginate repos/<owner>/<repo>/pulls/<number>/reviews`. Keep each review whose `body` is non-empty and whose `state` is neither `PENDING` nor `DISMISSED`. A dismissed review's summary was explicitly set aside, so it is not feedback the author still needs to address. This is the top-level text submitted with a review, which is neither a thread nor an issue comment, so nothing else here picks it up. Dedup it the same way as a general PR comment, and treat its reply like one in steps 4, 5, and 7.5.
 
 Everything remaining (unresolved threads, unaddressed general PR comments, and unaddressed review summaries) is a Candidate for step 4.
 
