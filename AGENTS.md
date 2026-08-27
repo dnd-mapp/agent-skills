@@ -21,3 +21,7 @@ Wayfinder maps and tickets are tracked as local Markdown files. For configuratio
 ## Review comments
 
 Run the `review-comments` skill ([skills/review-comments/SKILL.md](skills/review-comments/SKILL.md)) to draft and post PR review comments. For configuration, see [docs/agents/review-comments.md](docs/agents/review-comments.md).
+
+## Address comments
+
+Run the `address-comments` skill ([skills/address-comments/SKILL.md](skills/address-comments/SKILL.md)) to work through a PR's unresolved review threads, unaddressed general PR comments, and unaddressed review summaries. It addresses them with code changes, replies, and thread resolutions. It has no configuration file. The PR author runs it on their own PR, so replies and thread resolutions post as the active `gh` account rather than a configured bot.
