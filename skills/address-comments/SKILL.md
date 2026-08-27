@@ -48,7 +48,7 @@ Keep threads where `isResolved` is `false`, regardless of author. A thread opene
 
 Each comment carries two IDs. `id` is the GraphQL node ID, used by `resolveReviewThread` in step 7.6. `databaseId` is the numeric REST ID, used by the reply call in step 7.5. Keep both.
 
-Fetch general conversation comments too: `gh api repos/<owner>/<repo>/issues/<number>/comments`. Read them in order. Drop a comment if a later comment from the current `gh` identity (`gh api user --jq .login`) already answers it. Judge this by reading comprehension, never by matching nearby wording. This is the same standard `/review-comments` step 7 applies to its own dedup.
+Fetch general conversation comments too: `gh api --paginate repos/<owner>/<repo>/issues/<number>/comments` (without `--paginate` this returns only the first 30). Read them in order. Drop a comment if a later comment from the current `gh` identity (`gh api user --jq .login`) already answers it. Judge this by reading comprehension, never by matching nearby wording. This is the same standard `/review-comments` step 7 applies to its own dedup.
 
 Everything remaining (unresolved threads and unaddressed general comments) is a Candidate for step 4.
 
