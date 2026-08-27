@@ -1,6 +1,6 @@
 ---
 name: address-comments
-description: Address existing comments on a pull request (review threads and general PR conversation comments) with code changes, replies, and thread resolutions, reviewed with you before anything is applied. Use when the user wants to respond to or resolve outstanding PR feedback, or when another skill needs a PR's comments addressed.
+description: Address existing comments on a pull request (review threads and general PR conversation comments) with code changes, replies, and thread resolutions. The plan is reviewed with you before anything is applied. Use when the user wants to respond to or resolve outstanding PR feedback, or when another skill needs a PR's comments addressed.
 ---
 
 # Address Comments
