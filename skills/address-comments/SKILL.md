@@ -34,7 +34,7 @@ Work on the PR's actual branch, since this skill edits files and pushes. Check w
   - Create a throwaway worktree with `git worktree add --detach <path>`. The `--detach` stops `git worktree add` from leaving a stray branch behind. Put `<path>` in a scratch or temp directory named distinctly per PR, e.g. a `pr-<number>` subdirectory.
   - Run `gh pr checkout <number>` inside it. This fetches the branch and configures its upstream and push target the way an interactive checkout would, for a same-repo PR and a fork PR alike. A plain `git push` in step 7.3 then lands on the right repo and branch.
   - Run the rest of this skill from inside the worktree, steps 4 and 7 included, so `/commit` and `git push` act on it and not the user's main checkout.
-  - Tear the worktree down once you no longer need it, regardless of outcome: step 7 finished, a stop or failure partway through step 7, step 3 found no Candidates, or the user rejected the plan at step 6.
+  - Tear the worktree down once you no longer need it, on any exit: a completed step 7, no Candidates at step 3, a rejected plan at step 6, or a failure anywhere in steps 3 through 7.
   - Run `git worktree remove <path>` (`--force` once for a dirty worktree, twice for a locked one). If that fails or leaves dangling metadata, run `git worktree remove --force <path>` followed by `git worktree prune -v`.
   - Then delete the local branch `gh pr checkout` created with `git branch -D <headRefName>`. This path only runs when it didn't exist locally before, so the branch is safe to remove.
 
