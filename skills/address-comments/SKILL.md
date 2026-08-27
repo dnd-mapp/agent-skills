@@ -17,8 +17,18 @@ Gather `number`, `baseRefName`, and `headRefName` via `gh pr view <number> --jso
 
 Work on the PR's actual branch, since this skill edits files and pushes. Check whether `headRefName` exists as a local branch (`git branch --list <headRefName>`):
 
-- **Exists locally**: if the working tree isn't clean (`git status --porcelain`), stop and tell the user to commit or stash before re-running. Never stash or switch branches on their behalf. Record the branch the user is currently on. Otherwise `git checkout <headRefName>`, then `git fetch` and compare `HEAD` against its upstream. If the upstream has commits `HEAD` lacks, `git merge --ff-only`. Stop if the histories have diverged, since step 7.3's push would be rejected. If `HEAD` is level with or ahead of the upstream, proceed. Work here directly for the rest of this skill. When `git checkout` moved the user off another branch, the step 7 summary must say they were left on `<headRefName>`; don't switch them back on their behalf.
-- **Doesn't exist locally** (never fetched, or a fork PR): create a throwaway worktree (`git worktree add --detach <path>`, detached so `git worktree add` doesn't leave a stray branch behind) in a scratch/temp directory named distinctly per PR, e.g. a `pr-<number>` subdirectory. Run `gh pr checkout <number>` inside it. This fetches the branch and configures its upstream and push target the same way an interactive checkout would, for a same-repo PR and a fork PR alike, so a plain `git push` in step 7.3 lands on the right repo and branch. Tear the worktree down once you no longer need it, regardless of outcome: step 7 finished, step 3 found no candidates, or the user rejected the plan at step 6. Run `git worktree remove <path>` (`--force` once for a dirty worktree, twice for a locked one). If that fails or leaves dangling metadata, run `git worktree remove --force <path>` followed by `git worktree prune -v`.
+- **Exists locally**:
+  - If the working tree isn't clean (`git status --porcelain`), stop and tell the user to commit or stash before re-running. Never stash or switch branches on their behalf.
+  - Record the branch the user is currently on.
+  - `git checkout <headRefName>`, then `git fetch` and compare `HEAD` against its upstream.
+  - If the upstream has commits `HEAD` lacks, `git merge --ff-only`. Stop if the histories have diverged, since step 7.3's push would be rejected.
+  - Otherwise `HEAD` is level with or ahead of the upstream. Proceed, and work here directly for the rest of this skill.
+  - If `git checkout` moved the user off another branch, the step 7 summary must say they were left on `<headRefName>`. Don't switch them back on their behalf.
+- **Doesn't exist locally** (never fetched, or a fork PR):
+  - Create a throwaway worktree with `git worktree add --detach <path>`. The `--detach` stops `git worktree add` from leaving a stray branch behind. Put `<path>` in a scratch or temp directory named distinctly per PR, e.g. a `pr-<number>` subdirectory.
+  - Run `gh pr checkout <number>` inside it. This fetches the branch and configures its upstream and push target the way an interactive checkout would, for a same-repo PR and a fork PR alike. A plain `git push` in step 7.3 then lands on the right repo and branch.
+  - Tear the worktree down once you no longer need it, regardless of outcome: step 7 finished, step 3 found no candidates, or the user rejected the plan at step 6.
+  - Run `git worktree remove <path>` (`--force` once for a dirty worktree, twice for a locked one). If that fails or leaves dangling metadata, run `git worktree remove --force <path>` followed by `git worktree prune -v`.
 
 ## 3. Gather comments to address
 
@@ -65,11 +75,11 @@ The Treatments:
 - **Code change**: draft the change. In scope because the diff already touches the area, or because the fix is small enough that the extra scope isn't a real cost.
 - **Reply only**: acknowledgment, disagreement, a clarifying question, or something already true. No code change.
 - **Follow-up ticket**: the request is valid but belongs outside this PR: different files, unrelated behavior, or a change disproportionate to the PR's purpose. Runs through `/file-ticket` in step 7 instead of a code change here.
-- **No action needed**: nothing to respond to. Outdated (superseded by a later commit), already resolved by something else in this run, or not actually actionable. Still goes in the plan in step 5 with a one-line reason; nothing silently drops.
+- **No action needed**: nothing to respond to. Outdated (superseded by a later commit), already resolved by something else in this run, or not actually actionable. Still goes in the plan in step 5 with a one-line reason, so nothing silently drops.
 
 A review thread resolves only when the Treatment fully satisfies it: a **Code change** that answers the comment, or a **Follow-up ticket** filed for it. **Reply only** never resolves the thread, including a pushback or clarifying reply. Leave it open for the reviewer to close.
 
-Draft each reply now. A reply to a general comment quotes the original text it's responding to, since nothing in the UI otherwise ties them together. A reply to a review thread doesn't, since GitHub already anchors it inline. A reply for a **Follow-up ticket** Candidate names the issue it will cite with a placeholder, since the issue doesn't exist until step 7.4; step 7.5 splices the real number and URL in before posting.
+Draft each reply now. A reply to a general comment quotes the original text it's responding to, since nothing in the UI otherwise ties them together. A reply to a review thread doesn't, since GitHub already anchors it inline. A reply for a **Follow-up ticket** Candidate names the issue it will cite with a placeholder, since the issue doesn't exist until step 7.4. Step 7.5 splices in the real number and URL before posting.
 
 ## 5. Draft the plan
 
