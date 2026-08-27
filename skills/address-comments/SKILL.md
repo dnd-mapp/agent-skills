@@ -54,7 +54,11 @@ Everything remaining (unresolved threads and unaddressed general comments) is a 
 
 ## 4. Decide each Candidate's Treatment
 
-Read every Candidate against `git diff <baseRefName>...HEAD` in the workspace from step 2, and decide one Treatment:
+Read every Candidate against the PR's diff in the workspace from step 2, then decide one Treatment.
+
+First run `git fetch origin <baseRefName>`, then diff with `git diff origin/<baseRefName>...HEAD`. The worktree path fetches only the PR head, and a local `<baseRefName>` branch can be missing or stale. A bare `<baseRefName>` would compare against the wrong base.
+
+The Treatments:
 
 - **Code change**: draft the change. In scope because the diff already touches the area, or because the fix is small enough that the extra scope isn't a real cost.
 - **Reply only**: acknowledgment, disagreement, a clarifying question, or something already true. No code change.
