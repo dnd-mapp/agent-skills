@@ -36,18 +36,22 @@ gh api graphql -f query='
     repository(owner: $owner, name: $repo) {
       pullRequest(number: $number) {
         reviewThreads(first: 100) {
+          pageInfo { hasNextPage endCursor }
           nodes {
             id
             isResolved
             comments(first: 100) {
+              pageInfo { hasNextPage endCursor }
               nodes { author { login } body url createdAt }
             }
           }
         }
         reviews(first: 100) {
+          pageInfo { hasNextPage endCursor }
           nodes { author { login } body state url submittedAt }
         }
         comments(first: 100) {
+          pageInfo { hasNextPage endCursor }
           nodes { author { login } body url createdAt }
         }
       }
@@ -55,7 +59,7 @@ gh api graphql -f query='
   }' -f owner=<owner> -f repo=<repo> -F number=<number>
 ```
 
-Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review bodies it submitted, and PR comments it wrote. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review body and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output. Paginate any list past 100 entries, and any thread past 100 comments.
+Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review bodies it submitted, and PR comments it wrote. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review body and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output. Each connection returns `pageInfo`: when `hasNextPage` is true, follow `endCursor` to fetch the rest before drafting. This covers the three top-level lists and any thread past 100 comments.
 
 If this call fails (rate limit, transient API error, etc.), surface a loud warning and proceed as if the account has no prior feedback on this PR. This is the same warn-and-continue pattern as step 4's auth check. The only cost is this run falling back to today's behavior (no dedup), not a new failure mode.
 
