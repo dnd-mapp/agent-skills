@@ -100,7 +100,7 @@ Invoke `/code-review` from inside the worktree, reviewing since `baseRefName` (t
 
 ## 7. Draft the comments
 
-Read the diff and `/code-review`'s prose findings together, in the same context. Never mechanically parse the prose, and never fork `/code-review`'s own sub-agent briefs into a structured schema. It lives outside this repo and isn't reachable to change.
+Read the diff and `/code-review`'s prose findings together, in the same context. Never mechanically parse the prose, and never fork `/code-review`'s own subagent briefs into a structured schema. It lives outside this repo and isn't reachable to change.
 
 Run every finding through this dedup check before drafting anything from it. Match it by reading comprehension against all of the account's prior feedback from step 3: its review threads, its earlier review summaries, and its general PR comments. Never match on line number, since lines drift between commits. Classify each finding:
 
