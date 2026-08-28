@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
-- `review-comments` skill now derives the base repo owner and name from the PR URL, so a run from a fork clone resolves review threads against the base repository instead of the fork.
+- `review-comments` skill now derives the repo owner and name from the PR URL rather than the local clone's remotes, so its GitHub API calls always target the repo the PR lives on.
 
 ## [1.3.0] - 2026-08-25
 

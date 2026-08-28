@@ -22,9 +22,9 @@ Once confirmed, write the file and ask whether to commit it on the current branc
 
 Optional PR number/URL argument; default to the current branch's open PR (`gh pr view`), mirroring `/pr`'s convention. Stop with a clear message if neither is given and none is found.
 
-Gather `number`, `baseRefName`, `headRefName`, `headRefOid`, `headRepositoryOwner`, `isCrossRepository`, and `url` via `gh pr view <number> --json number,baseRefName,headRefName,headRefOid,headRepositoryOwner,isCrossRepository,url`.
+Gather `number`, `baseRefName`, `headRefName`, `headRefOid`, and `url` via `gh pr view <number> --json number,baseRefName,headRefName,headRefOid,url`.
 
-`<owner>` and `<repo>` for every API call in this skill come from the PR's `url` (`https://github.com/<owner>/<repo>/pull/<number>`), which is always the base repository. Take them from there, not from `gh repo view` or the local clone's remotes. In a fork clone those point at the fork, where this PR's review threads don't live.
+`<owner>` and `<repo>` for every API call in this skill come from the PR's `url` (`https://github.com/<owner>/<repo>/pull/<number>`). Take them from there, not from `gh repo view` or the local clone's remotes, which can point at a different repo than the one the PR lives on. This skill assumes the PR is on the repo itself, not a fork.
 
 ## 3. Fetch this account's prior feedback on the PR
 
@@ -76,7 +76,7 @@ git fetch origin refs/pull/<number>/head:pr-<number>
 git worktree add <path> pr-<number>
 ```
 
-This sequence is identical for same-repo and fork PRs, since GitHub serves `refs/pull/<number>/head` from the base repository for both. It assumes `origin` is a clone of that base repo, the same assumption as step 2's `<owner>`/`<repo>`. In a fork clone, add the base repo as a remote and fetch the PR ref from there. `isCrossRepository` and `headRepositoryOwner` from step 2 are for labeling only, not for choosing a different fetch. Put `<path>` in a scratch/temporary directory outside the repository: this agent's own scratch directory if it has one, otherwise the OS temp directory. Name it distinctly per PR (e.g. a `pr-<number>` subdirectory) so concurrent runs don't collide.
+This fetches the PR head into a local `pr-<number>` ref and checks it out in a worktree. It assumes `origin` is the repo the PR lives on, the same as the rest of this skill. Put `<path>` in a scratch/temporary directory outside the repository: this agent's own scratch directory if it has one, otherwise the OS temp directory. Name it distinctly per PR (e.g. a `pr-<number>` subdirectory) so concurrent runs don't collide.
 
 ## 6. Run the code review
 
