@@ -45,7 +45,7 @@ _Avoid_: issue comment, discussion comment
 
 #### Addressed Finding
 
-A new finding that matches prior feedback the configured account itself posted on the PR: a Review Thread, an earlier Review Summary, or a General PR Comment. A thread signals it was handled through resolution or a reply; a Review Summary or General PR Comment, which carry no resolved bit, through the current diff or a later reply. `review-comments` step 7 carries the test. Dropped from the draft; never posted again.\
+A new finding that matches prior feedback the configured account itself posted on the PR: a Review Thread, an earlier Review Summary, or a General PR Comment. A thread signals it was handled through resolution or a reply. A Review Summary or General PR Comment carries no resolved bit, so it signals through the current diff or a later reply. `review-comments` step 7 carries the test. Dropped from the draft; never posted again.\
 _Avoid_: resolved finding, fixed finding
 
 #### Open Finding
