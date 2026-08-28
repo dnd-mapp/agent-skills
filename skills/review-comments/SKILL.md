@@ -59,7 +59,7 @@ gh api graphql -f query='
   }' -f owner=<owner> -f repo=<repo> -F number=<number>
 ```
 
-Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review summaries it submitted, and general PR comments it wrote. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review summary and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output.
+Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review summaries it submitted, and general PR comments it wrote. Keep a review only when its `body` is non-empty and its `state` is neither `PENDING` nor `DISMISSED`: GitHub creates a review object with an empty body for every batch of inline comments, and a dismissed review's summary was explicitly set aside. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review summary and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output.
 
 Each of the three top-level connections returns `pageInfo`: when `hasNextPage` is true, follow `endCursor` to fetch the rest before drafting. The nested `comments` connection takes no cursor here, so a thread with more than 100 comments needs a follow-up query keyed by its `id`:
 
