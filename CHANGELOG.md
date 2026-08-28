@@ -12,7 +12,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- `review-comments` skill now dedupes findings against the configured account's earlier top-level review bodies and general PR comments, not just its inline review threads. Its drafted top-level review body now carries only findings and a short verdict, keeping the run's methodology and dedup bookkeeping out of what gets posted. Base repo owner and name come from the PR URL, so fork PRs resolve to the right repository.
+- `review-comments` skill now dedupes findings against the configured account's earlier top-level review bodies and general PR comments, not just its inline review threads. Its drafted top-level review body now carries only findings and a short verdict, keeping the run's methodology and dedup bookkeeping out of what gets posted.
+
+### Fixed
+
+- `review-comments` skill now derives the base repo owner and name from the PR URL, so a run from a fork clone resolves review threads against the base repository instead of the fork.
 
 ## [1.3.0] - 2026-08-25
 
