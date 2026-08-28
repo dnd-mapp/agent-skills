@@ -45,12 +45,12 @@ _Avoid_: issue comment, discussion comment
 
 #### Addressed Finding
 
-A new finding that matches prior feedback the configured account itself posted on the PR: a Review Thread, an earlier Review Summary, or a General PR Comment. A thread counts as addressed when it's resolved or has a reply the agent judges as fixing it. A review summary or PR comment carries no resolved bit, so it counts as addressed only when the current diff or a later author reply visibly answers the point. Dropped from the draft; never posted again.\
+A new finding that matches prior feedback the configured account itself posted on the PR: a Review Thread, an earlier Review Summary, or a General PR Comment. A thread signals it was handled through resolution or a reply; a Review Summary or General PR Comment, which carry no resolved bit, through the current diff or a later reply. `review-comments` step 7 carries the test. Dropped from the draft; never posted again.\
 _Avoid_: resolved finding, fixed finding
 
 #### Open Finding
 
-A new finding that matches prior feedback from the configured account on the PR that nothing has resolved: an unresolved Review Thread, or a review-summary or PR-comment point the diff and later replies leave unanswered. Dropped from the draft to avoid duplicating the account's own still-open point. Counted separately from Addressed Findings when `review-comments` reports what it suppressed, so the user can see it was intentionally skipped, not missed.\
+A new finding that matches prior feedback from the configured account on the PR that nothing has resolved: an unresolved Review Thread, or a Review Summary or General PR Comment point that step 7 finds still unanswered. Dropped from the draft to avoid duplicating the account's own still-open point. Counted separately from Addressed Findings when `review-comments` reports what it suppressed, so the user can see it was intentionally skipped, not missed.\
 _Avoid_: duplicate finding, repeat finding
 
 #### New Finding
