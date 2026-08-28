@@ -93,7 +93,7 @@ git fetch origin refs/pull/<number>/head:pr-<number>
 git worktree add <path> pr-<number>
 ```
 
-This fetches the PR head into a local `pr-<number>` ref and checks it out in a worktree. It assumes `origin` is the repo the PR lives on, the same as the rest of this skill. Put `<path>` in a scratch/temporary directory outside the repository: this agent's own scratch directory if it has one, otherwise the OS temp directory. Name it distinctly per PR (e.g. a `pr-<number>` subdirectory) so concurrent runs don't collide.
+This fetches the PR head into a local `pr-<number>` ref and checks it out in a worktree. It needs `origin` to point at the repo the PR lives on. Step 2's assumption that the PR isn't on a fork covers that. No other step depends on `origin`, since the API calls take `<owner>` and `<repo>` from the PR URL. Put `<path>` in a scratch/temporary directory outside the repository: this agent's own scratch directory if it has one, otherwise the OS temp directory. Name it distinctly per PR (e.g. a `pr-<number>` subdirectory) so concurrent runs don't collide.
 
 ## 6. Run the code review
 
