@@ -4,6 +4,8 @@ When `review-comments` re-runs on a PR, it needs to know whether a finding it al
 
 We combine the two thread-native signals instead: a thread counts as addressed if it's resolved, or if it has a reply the agent judges as fixing it. We also suppress findings that repeat a thread that's neither resolved nor addressed (an Open Finding), not just addressed ones. Re-posting a still-open comment verbatim every run is the same noise problem as re-posting an addressed one. Where a match is ambiguous, we default to not suppressing: post again rather than the reverse. A missed regression is a correctness bug in the review. An occasional duplicate is just a two-second dismissal during approval.
 
+The same check also runs against the account's earlier top-level review bodies and general PR comments, so a point it once made only in a review summary still dedupes. Those have no resolved bit, so the addressed signal there is narrower: the current diff, or a later author reply, has to visibly answer the point. Everything else about the rule is unchanged, including the default to post again on an ambiguous match.
+
 ## Considered Options
 
 - **Resolved status only.** Rejected: cheap and explicit, but a silent fix without a resolve-click would still get re-flagged. A resolved-but-not-actually-fixed thread would also silently suppress a real issue.

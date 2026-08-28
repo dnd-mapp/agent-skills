@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - `address-comments` skill: works through a pull request's unresolved review threads, unaddressed general PR comments, and unaddressed review summaries. For each, it applies a reviewed plan of code changes, replies, follow-up tickets, and thread resolutions.
 
+### Changed
+
+- `review-comments` skill now dedupes findings against the configured account's earlier top-level review bodies and general PR comments, not just its inline review threads. Its drafted top-level review body now carries only findings and a short verdict, keeping the run's methodology and dedup bookkeeping out of what gets posted. Base repo owner and name come from the PR URL, so fork PRs resolve to the right repository.
+
 ## [1.3.0] - 2026-08-25
 
 ### Added
