@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- `review-comments` skill now dedupes findings against the configured account's earlier top-level review bodies and general PR comments, not just its inline review threads. Its drafted top-level review body now carries only findings and a short verdict, keeping the run's methodology and dedup bookkeeping out of what gets posted.
+- `review-comments` skill now dedupes findings against the configured account's earlier review summaries and general PR comments, not just its inline review threads. Its drafted review summary now carries only findings and a short verdict, keeping the run's methodology and dedup bookkeeping out of what gets posted.
 
 ### Fixed
 

@@ -5,7 +5,7 @@ description: Review a PR and post comments to GitHub. Use when the user wants a 
 
 # Review Comments
 
-Run `/code-review` against a pull request, then draft one top-level review body plus per-finding inline comments from its findings. Exclude anything the configured account already raised on the PR, whether in a review thread, an earlier review body, or a general PR comment, that's since been addressed or that's still sitting unresolved from an earlier run. Get your approval, then post the draft as a single GitHub review under the configured account.
+Run `/code-review` against a pull request, then draft one review summary plus per-finding inline comments from its findings. Exclude anything the configured account already raised on the PR, whether in a review thread, an earlier review summary, or a general PR comment, that's since been addressed or that's still sitting unresolved from an earlier run. Get your approval, then post the draft as a single GitHub review under the configured account.
 
 ## 1. Load or bootstrap the repo config
 
@@ -28,7 +28,7 @@ Gather `number`, `baseRefName`, `headRefName`, `headRefOid`, and `url` via `gh p
 
 ## 3. Fetch this account's prior feedback on the PR
 
-Before anything else, look up everything the account from step 1 has already posted on this PR: its inline review threads, its top-level review bodies, and its general PR comments. Cover all of its past reviews, not just the most recent one. A finding it once made only in a review body, with no inline thread, still needs to dedupe against this run. This is an independent read with nothing to wait on. Kick it off now rather than adjacent to step 7 where it's used, so it can run while steps 4 through 6 (auth check, worktree setup, code review) proceed.
+Before anything else, look up everything the account from step 1 has already posted on this PR: its inline review threads, its review summaries, and its general PR comments. Cover all of its past reviews, not just the most recent one. A finding it once made only in a review summary, with no inline thread, still needs to dedupe against this run. This is an independent read with nothing to wait on. Kick it off now rather than adjacent to step 7 where it's used, so it can run while steps 4 through 6 (auth check, worktree setup, code review) proceed.
 
 ```bash
 gh api graphql -f query='
@@ -59,7 +59,7 @@ gh api graphql -f query='
   }' -f owner=<owner> -f repo=<repo> -F number=<number>
 ```
 
-Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review bodies it submitted, and PR comments it wrote. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review body and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output.
+Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review summaries it submitted, and general PR comments it wrote. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review summary and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output.
 
 Each of the three top-level connections returns `pageInfo`: when `hasNextPage` is true, follow `endCursor` to fetch the rest before drafting. The nested `comments` connection takes no cursor here, so a thread with more than 100 comments needs a follow-up query keyed by its `id`:
 
@@ -102,32 +102,32 @@ Invoke `/code-review` from inside the worktree, reviewing since `baseRefName` (t
 
 Read the diff and `/code-review`'s prose findings together, in the same context. Never mechanically parse the prose, and never fork `/code-review`'s own sub-agent briefs into a structured schema. It lives outside this repo and isn't reachable to change.
 
-Run every finding through this dedup check before drafting anything from it. Match it by reading comprehension against all of the account's prior feedback from step 3: its review threads, its earlier review bodies, and its PR comments. Never match on line number, since lines drift between commits. Classify each finding:
+Run every finding through this dedup check before drafting anything from it. Match it by reading comprehension against all of the account's prior feedback from step 3: its review threads, its earlier review summaries, and its general PR comments. Never match on line number, since lines drift between commits. Classify each finding:
 
-- **Addressed Finding**: matches a resolved thread, a thread with a reply you judge as fixing it, or a point from a past review body or PR comment that the current diff or a later author reply resolves. Drop it.
-- **Open Finding**: matches an unresolved thread, or a past review-body or PR-comment point that nothing has resolved. Drop it too, since re-posting the account's own live point is the same noise. Keep it in a list separate from Addressed Findings for step 9.
+- **Addressed Finding**: matches a resolved thread, a thread with a reply you judge as fixing it, or a point from a past review summary or PR comment that the current diff or a later author reply resolves. Drop it.
+- **Open Finding**: matches an unresolved thread, or a past review-summary or PR-comment point that nothing has resolved. Drop it too, since re-posting the account's own live point is the same noise. Keep it in a list separate from Addressed Findings for step 9.
 - **New Finding**: the match is ambiguous, or there is none. Draft it. When unsure, don't suppress: a missed regression is worse than an occasional duplicate.
 
 Never write to a matched thread itself in this step. Addressed and Open Findings are dropped from this run's draft only, nothing is posted back to the old thread.
 
-For each New Finding, resolve it to a file and line yourself as a reading-comprehension step. One that anchors to a specific file+line becomes an inline comment; one that can't goes into the top-level review body. Don't force an inline comment where none applies.
+For each New Finding, resolve it to a file and line yourself as a reading-comprehension step. One that anchors to a specific file+line becomes an inline comment; one that can't goes into the review summary. Don't force an inline comment where none applies.
 
-The top-level body carries only substantive review content: New Findings with no inline anchor, and a one or two sentence overall verdict. It reads as a PR review, not a run log. That excludes the methodology (`/code-review`, the two axes, the worktree) and the dedup bookkeeping (which prior threads exist, what was suppressed, how thorough the earlier rounds were). When there are no unanchored findings and the verdict is a plain approve, one sentence is the whole body.
+The review summary carries only substantive review content: New Findings with no inline anchor, and a one or two sentence overall verdict. It reads as a PR review, not a run log. That excludes the methodology (`/code-review`, the two axes, the worktree) and the dedup bookkeeping (which prior threads exist, what was suppressed, how thorough the earlier rounds were). When there are no unanchored findings and the verdict is a plain approve, one sentence is the whole summary.
 
 For `line`/`side` on each New Finding's inline comment: an added or unchanged line gets `line` = its line number in the diff's new version, `side: RIGHT`; a deleted line gets `line` = its line number in the old version, `side: LEFT`.
 
 Determine the review event:
 
-- **`suggested_event: auto`**: zero New Findings (inline or top-level) → `APPROVE`; any hard Standards violation or a missing/wrong Spec requirement among them → `REQUEST_CHANGES`; anything else → `COMMENT`.
+- **`suggested_event: auto`**: zero New Findings (inline or in the summary) → `APPROVE`; any hard Standards violation or a missing/wrong Spec requirement among them → `REQUEST_CHANGES`; anything else → `COMMENT`.
 - **A fixed override** (`approve` / `request_changes` / `comment`): use it directly, no computation.
 
 ## 8. Run writing-style
 
-Run the `writing-style` skill over the drafted top-level body and every inline comment before presenting them in the next step.
+Run the `writing-style` skill over the drafted review summary and every inline comment before presenting them in the next step.
 
 ## 9. Draft, then review before touching GitHub
 
-Present the account it'll post as, the PR, the suggested event, the top-level body, and every inline comment (file, line, side, text). This is what will be posted.
+Present the account it'll post as, the PR, the suggested event, the review summary, and every inline comment (file, line, side, text). This is what will be posted.
 
 Then, separate from what gets posted, give a one-line summary of what step 7 suppressed: the counts of Addressed and Open Findings. Example: "Suppressed 6 findings matching prior feedback (5 addressed, 1 open)." List them individually only if the user asks.
 
@@ -141,7 +141,7 @@ Build the review payload and post it as one atomic call:
 
 ```bash
 gh api repos/<owner>/<repo>/pulls/<number>/reviews --method POST --input - <<'EOF'
-{"commit_id": "<headRefOid>", "event": "<EVENT>", "body": "<top-level body>", "comments": [{"path": "<path>", "line": <line>, "side": "<RIGHT|LEFT>", "body": "<text>"}]}
+{"commit_id": "<headRefOid>", "event": "<EVENT>", "body": "<review summary>", "comments": [{"path": "<path>", "line": <line>, "side": "<RIGHT|LEFT>", "body": "<text>"}]}
 EOF
 ```
 
