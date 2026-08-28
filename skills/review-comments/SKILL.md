@@ -30,12 +30,14 @@ Gather `number`, `baseRefName`, `headRefName`, `headRefOid`, and `url` via `gh p
 
 Before anything else, look up everything the account from step 1 has already posted on this PR: its inline review threads, its review summaries, and its general PR comments. Cover all of its past reviews, not just the most recent one. A finding it once made only in a review summary, with no inline thread, still needs to dedupe against this run. This is an independent read with nothing to wait on. Kick it off now rather than adjacent to step 7 where it's used, so it can run while steps 4 through 6 (auth check, worktree setup, code review) proceed.
 
+Fetch the review threads via GraphQL, paginated:
+
 ```bash
-gh api graphql -f query='
-  query($owner: String!, $repo: String!, $number: Int!) {
+gh api graphql --paginate -f query='
+  query($owner: String!, $repo: String!, $number: Int!, $endCursor: String) {
     repository(owner: $owner, name: $repo) {
       pullRequest(number: $number) {
-        reviewThreads(first: 100) {
+        reviewThreads(first: 100, after: $endCursor) {
           pageInfo { hasNextPage endCursor }
           nodes {
             id
@@ -46,22 +48,12 @@ gh api graphql -f query='
             }
           }
         }
-        reviews(first: 100) {
-          pageInfo { hasNextPage endCursor }
-          nodes { author { login } body state url submittedAt }
-        }
-        comments(first: 100) {
-          pageInfo { hasNextPage endCursor }
-          nodes { author { login } body url createdAt }
-        }
       }
     }
   }' -f owner=<owner> -f repo=<repo> -F number=<number>
 ```
 
-Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review summaries it submitted, and general PR comments it wrote. Keep a review only when its `body` is non-empty and its `state` is neither `PENDING` nor `DISMISSED`: GitHub creates a review object with an empty body for every batch of inline comments, and a dismissed review's summary was explicitly set aside. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review summary and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output.
-
-Each of the three top-level connections returns `pageInfo`: when `hasNextPage` is true, follow `endCursor` to fetch the rest before drafting. The nested `comments` connection takes no cursor here, so a thread with more than 100 comments needs a follow-up query keyed by its `id`:
+`--paginate` walks `reviewThreads` for a PR with more than 100 threads: the query declares `$endCursor` and `gh` feeds the cursor back on each page, following only the first `pageInfo` in the response. `reviewThreads.pageInfo` sits ahead of its `nodes`, so `gh` never mistakes the nested `comments.pageInfo` for the outer cursor. A thread with more than 100 comments has `comments.pageInfo.hasNextPage` set to `true`; fetch the rest with a follow-up query keyed by the thread `id`:
 
 ```bash
 gh api graphql --paginate -f query='
@@ -77,7 +69,16 @@ gh api graphql --paginate -f query='
   }' -f threadId=<thread_id>
 ```
 
-If this call fails (rate limit, transient API error, etc.), surface a loud warning and proceed as if the account has no prior feedback on this PR. This is the same warn-and-continue pattern as step 4's auth check. The only cost is this run falling back to today's behavior (no dedup), not a new failure mode.
+Fetch the review summaries and general PR comments over REST, where `--paginate` handles the paging directly:
+
+```bash
+gh api --paginate repos/<owner>/<repo>/pulls/<number>/reviews
+gh api --paginate repos/<owner>/<repo>/issues/<number>/comments
+```
+
+Across all three lists, keep only what the account from step 1 authored: review threads it started (its login on the first comment), review summaries it submitted, and general PR comments it wrote. Keep a review only when its `body` is non-empty and its `state` is neither `PENDING` nor `DISMISSED`: GitHub creates a review object with an empty body for every batch of inline comments, and a dismissed review's summary was explicitly set aside. For each kept thread, record whether it's resolved and the full text of every reply. For each kept review summary and PR comment, record its full text. A thread, review, or comment from a human reviewer isn't in scope; this only dedupes against the account's own prior output.
+
+If these calls fail (rate limit, transient API error, etc.), surface a loud warning and proceed as if the account has no prior feedback on this PR. This is the same warn-and-continue pattern as step 4's auth check. The only cost is this run falling back to today's behavior (no dedup), not a new failure mode.
 
 ## 4. Check the configured account's auth status
 
