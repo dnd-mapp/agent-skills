@@ -118,7 +118,7 @@ For `line`/`side` on each New Finding's inline comment: an added or unchanged li
 
 Determine the review event:
 
-- **`suggested_event: auto`**: zero New Findings (inline or in the summary) → `APPROVE`; any hard Standards violation or a missing/wrong Spec requirement among them → `REQUEST_CHANGES`; anything else → `COMMENT`.
+- **`suggested_event: auto`**: zero New Findings and zero Open Findings → `APPROVE`; any New Finding that is a hard Standards violation or a missing or wrong Spec requirement → `REQUEST_CHANGES`; anything else, including a run left with only Open Findings, → `COMMENT`.
 - **A fixed override** (`approve` / `request_changes` / `comment`): use it directly, no computation.
 
 ## 8. Run writing-style
