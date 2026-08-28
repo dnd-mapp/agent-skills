@@ -28,29 +28,34 @@ _Avoid_: template
 
 ### Review Comment Dedup
 
+#### Prior Feedback
+
+Review comments the configured account itself already posted on a PR, in any of three shapes: a Review Thread, a Review Summary, or a General PR Comment. `review-comments` matches each new finding against this whole set when deciding whether it has already been raised.\
+_Avoid_: earlier feedback, past comments
+
 #### Review Thread
 
-A GitHub inline review comment together with all of its replies, treated as one unit when checking whether a finding has already been raised on a PR. One of the shapes of prior feedback from the configured account that the dedup check matches against, alongside its earlier review summaries and general PR comments.\
+A GitHub inline review comment together with all of its replies, treated as one unit when checking whether a finding has already been raised on a PR. One shape of Prior Feedback.\
 _Avoid_: comment chain, discussion, comment
 
 #### Review Summary
 
-The overall body text of a GitHub PR review, separate from any inline thread or general PR comment. One of the shapes of prior feedback from the configured account that the dedup check matches against, and also the single review-summary block `review-comments` drafts for its own review.\
+The overall body text of a GitHub PR review, separate from any inline thread or general PR comment. One shape of Prior Feedback, and also the single review-summary block `review-comments` drafts for its own review.\
 _Avoid_: review body, top-level review body, review comment
 
 #### General PR Comment
 
-A comment on the pull request's conversation timeline, not attached to a line of the diff or submitted as part of a review. One of the shapes of prior feedback from the configured account that the dedup check matches against.\
+A comment on the pull request's conversation timeline, not attached to a line of the diff or submitted as part of a review. One shape of Prior Feedback.\
 _Avoid_: issue comment, discussion comment
 
 #### Addressed Finding
 
-A new finding that matches prior feedback the configured account itself posted on the PR: a Review Thread, an earlier Review Summary, or a General PR Comment. A thread signals it was handled through resolution or a reply. A Review Summary or General PR Comment carries no resolved bit, so it signals through the current diff or a later reply. The `review-comments` skill carries the test. Dropped from the draft; never posted again.\
+A new finding that matches Prior Feedback the configured account posted on the PR. A thread signals it was handled through resolution or a reply. A Review Summary or General PR Comment carries no resolved bit, so it signals through the current diff or a later reply. The `review-comments` skill carries the operative rule. Dropped from the draft; never posted again.\
 _Avoid_: resolved finding, fixed finding
 
 #### Open Finding
 
-A new finding that matches unresolved prior feedback from the configured account on the PR. The match is an unresolved Review Thread, or a Review Summary or General PR Comment point that the `review-comments` skill finds still unanswered. Dropped from the draft to avoid duplicating the account's own still-open point. Counted separately from Addressed Findings when `review-comments` reports what it suppressed, so the user can see it was intentionally skipped, not missed.\
+A new finding that matches unresolved Prior Feedback from the configured account on the PR. The match is an unresolved Review Thread, or a Review Summary or General PR Comment point that the `review-comments` skill finds still unanswered. Dropped from the draft to avoid duplicating the account's own still-open point. Counted separately from Addressed Findings when `review-comments` reports what it suppressed, so the user can see it was intentionally skipped, not missed.\
 _Avoid_: duplicate finding, repeat finding
 
 #### New Finding
