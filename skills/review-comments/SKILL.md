@@ -76,7 +76,7 @@ git fetch origin refs/pull/<number>/head:pr-<number>
 git worktree add <path> pr-<number>
 ```
 
-This sequence is identical for same-repo and fork PRs. `isCrossRepository` and `headRepositoryOwner` from step 2 are for labeling only, not for choosing a different fetch. Put `<path>` in a scratch/temporary directory outside the repository: this agent's own scratch directory if it has one, otherwise the OS temp directory. Name it distinctly per PR (e.g. a `pr-<number>` subdirectory) so concurrent runs don't collide.
+This sequence is identical for same-repo and fork PRs, since GitHub serves `refs/pull/<number>/head` from the base repository for both. It assumes `origin` is a clone of that base repo, the same assumption as step 2's `<owner>`/`<repo>`. In a fork clone, add the base repo as a remote and fetch the PR ref from there. `isCrossRepository` and `headRepositoryOwner` from step 2 are for labeling only, not for choosing a different fetch. Put `<path>` in a scratch/temporary directory outside the repository: this agent's own scratch directory if it has one, otherwise the OS temp directory. Name it distinctly per PR (e.g. a `pr-<number>` subdirectory) so concurrent runs don't collide.
 
 ## 6. Run the code review
 
