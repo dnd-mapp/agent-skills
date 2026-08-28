@@ -10,7 +10,7 @@ The same check also runs against the configured account's earlier review summari
 
 - **Resolved status only.** Rejected: cheap and explicit, but a silent fix without a resolve-click would still get re-flagged. A resolved-but-not-actually-fixed thread would also silently suppress a real issue.
 - **Diffing the code at the flagged location against its state when the old comment was posted.** Rejected: requires tracking the original commit per comment, and inferring sameness from code shape. That's strictly more machinery than reading two signals GitHub already tracks per thread. This rejection is about tracking per-comment history, not about reading the *current* diff to judge whether a review-summary or PR-comment point has since been answered. That judgment, described in the paragraph above, tracks no history.
-- **Suppress only Addressed Findings, re-flag Open ones every run.** Rejected: an Open Finding matching an old unresolved thread is functionally a duplicate of the configured account's own still-open comment. Leaving it in scope for re-posting recreates the noise this feature exists to remove.
+- **Suppress only Addressed Findings, re-flag Open ones every run.** Rejected: an Open Finding matching an old unresolved thread is functionally a duplicate of the configured account's own still-open point. Leaving it in scope for re-posting recreates the noise this feature exists to remove.
 - **Default ambiguous matches to suppress.** Rejected: an unnoticed suppressed finding is a silent regression in review quality, judged worse than an occasional duplicate the user dismisses during the approval step.
 
 ## Consequences
