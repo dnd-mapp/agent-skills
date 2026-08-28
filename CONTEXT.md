@@ -50,7 +50,7 @@ _Avoid_: resolved finding, fixed finding
 
 #### Open Finding
 
-A new finding that matches prior bot feedback on the PR that nothing has resolved: an unresolved Review Thread, or a review-summary or PR-comment point the diff and later replies leave unanswered. Dropped from the draft to avoid duplicating the bot's own still-open point. Listed separately from Addressed Findings in the step-9 draft, so the user can see it was intentionally skipped, not missed.\
+A new finding that matches prior bot feedback on the PR that nothing has resolved: an unresolved Review Thread, or a review-summary or PR-comment point the diff and later replies leave unanswered. Dropped from the draft to avoid duplicating the bot's own still-open point. Counted separately from Addressed Findings when `review-comments` reports what it suppressed, so the user can see it was intentionally skipped, not missed.\
 _Avoid_: duplicate finding, repeat finding
 
 #### New Finding

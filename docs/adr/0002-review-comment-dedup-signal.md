@@ -4,7 +4,7 @@ When `review-comments` re-runs on a PR, it needs to know whether a finding it al
 
 We combine the two thread-native signals instead: a thread counts as addressed if it's resolved, or if it has a reply the agent judges as fixing it. We also suppress findings that repeat a thread that's neither resolved nor addressed (an Open Finding), not just addressed ones. Re-posting a still-open comment verbatim every run is the same noise problem as re-posting an addressed one. Where a match is ambiguous, we default to not suppressing: post again rather than the reverse. A missed regression is a correctness bug in the review. An occasional duplicate is just a two-second dismissal during approval.
 
-The same check also runs against the account's earlier review summaries and general PR comments, so a point it once made only in a summary still dedupes. Those sources carry no resolved bit, so the addressed signal there is narrower: the current diff or a later author reply has to visibly answer the point. The skill's step 7 carries the operative rule for all three sources.
+The same check also runs against the account's earlier review summaries and general PR comments, so a point it once made only in a summary still dedupes. Those sources carry no resolved bit, so the addressed signal there is narrower: the current diff or a later author reply has to visibly answer the point. The skill carries the operative rule for all three sources.
 
 ## Considered Options
 
