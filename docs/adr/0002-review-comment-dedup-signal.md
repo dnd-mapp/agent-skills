@@ -17,4 +17,4 @@ The same check also runs against the configured account's earlier review summari
 
 Matching depends on the agent's reading comprehension of thread content rather than a mechanical rule, so its accuracy is only as good as that judgment call. This is deliberate and consistent with how the skill already resolves findings to file/line by reading comprehension rather than mechanical parsing. But it means a future reader shouldn't expect matching to be deterministic or independently testable without re-running the agent.
 
-For a point raised only in a review summary or general PR comment there is no resolved bit, so the ambiguous-match default (post again) carries more of the load than it does for threads.
+A point raised only in a review summary or general PR comment has no resolved bit. The ambiguous-match default (post again) carries more of the load there than it does for threads.
