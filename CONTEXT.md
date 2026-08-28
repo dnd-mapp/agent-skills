@@ -50,7 +50,7 @@ _Avoid_: resolved finding, fixed finding
 
 #### Open Finding
 
-A new finding that matches prior feedback from the configured account on the PR that nothing has resolved: an unresolved Review Thread, or a Review Summary or General PR Comment point that step 7 finds still unanswered. Dropped from the draft to avoid duplicating the account's own still-open point. Counted separately from Addressed Findings when `review-comments` reports what it suppressed, so the user can see it was intentionally skipped, not missed.\
+A new finding that matches unresolved prior feedback from the configured account on the PR. The match is an unresolved Review Thread, or a Review Summary or General PR Comment point that step 7 finds still unanswered. Dropped from the draft to avoid duplicating the account's own still-open point. Counted separately from Addressed Findings when `review-comments` reports what it suppressed, so the user can see it was intentionally skipped, not missed.\
 _Avoid_: duplicate finding, repeat finding
 
 #### New Finding
