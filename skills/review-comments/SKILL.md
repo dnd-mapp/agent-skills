@@ -113,7 +113,12 @@ Never write to a matched thread itself in this step. Addressed and Open Findings
 
 For each New Finding, resolve it to a file and line yourself as a reading-comprehension step. One that anchors to a specific file+line becomes an inline comment; one that can't goes into the review summary. Don't force an inline comment where none applies.
 
-The review summary carries only substantive review content: New Findings with no inline anchor, and a one or two sentence overall verdict. It reads as a PR review, not a run log. That excludes the methodology (`/code-review`, the two axes, the worktree) and the dedup bookkeeping (which prior threads exist, what was suppressed, how thorough the earlier rounds were). When there are no unanchored findings and the verdict is a plain approve, one sentence is the whole summary.
+The review summary carries only substantive review content: New Findings with no inline anchor, and a one or two sentence overall verdict. It reads as a PR review, not a run log, so it excludes:
+
+- the methodology: `/code-review`, the two axes, the worktree
+- the dedup bookkeeping: which prior threads exist, what was suppressed, how thorough the earlier rounds were
+
+When there are no unanchored findings and the verdict is a plain approve, one sentence is the whole summary.
 
 For `line`/`side` on each New Finding's inline comment: an added or unchanged line gets `line` = its line number in the diff's new version, `side: RIGHT`; a deleted line gets `line` = its line number in the old version, `side: LEFT`.
 
