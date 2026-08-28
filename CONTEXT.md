@@ -35,7 +35,7 @@ _Avoid_: comment chain, discussion, comment
 
 #### Review Summary
 
-The overall body text of a GitHub PR review, separate from any inline thread or general PR comment. One of the shapes of prior feedback from the configured account that the dedup check matches against, and also the single top-level block `review-comments` drafts for its own review.\
+The overall body text of a GitHub PR review, separate from any inline thread or general PR comment. One of the shapes of prior feedback from the configured account that the dedup check matches against, and also the single review-summary block `review-comments` drafts for its own review.\
 _Avoid_: review body, top-level review body, review comment
 
 #### General PR Comment
