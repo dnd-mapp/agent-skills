@@ -41,7 +41,7 @@ _Avoid_: review body, top-level review body, review comment
 #### General PR Comment
 
 A comment on the pull request's conversation timeline, not attached to a line of the diff or submitted as part of a review. One of the shapes of prior bot feedback the dedup check matches against.\
-_Avoid_: PR comment, issue comment, discussion comment
+_Avoid_: issue comment, discussion comment
 
 #### Addressed Finding
 
