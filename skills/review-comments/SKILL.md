@@ -5,7 +5,7 @@ description: Review a PR and post comments to GitHub. Use when the user wants a 
 
 # Review Comments
 
-Run `/code-review` against a pull request, then draft one top-level review comment plus per-finding inline comments from its findings. Exclude anything the configured account already raised that's since been addressed, or that's still sitting unresolved from an earlier run. Get your approval, then post the draft as a single GitHub review under the configured account.
+Run `/code-review` against a pull request, then draft one top-level review body plus per-finding inline comments from its findings. Exclude anything the configured account already raised on the PR, whether in a review thread, an earlier review body, or a general PR comment, that's since been addressed or that's still sitting unresolved from an earlier run. Get your approval, then post the draft as a single GitHub review under the configured account.
 
 ## 1. Load or bootstrap the repo config
 

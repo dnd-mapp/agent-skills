@@ -30,22 +30,22 @@ _Avoid_: template
 
 #### Review Thread
 
-A GitHub inline review comment together with all of its replies, treated as one unit when checking whether a finding has already been raised on a PR.\
+A GitHub inline review comment together with all of its replies, treated as one unit when checking whether a finding has already been raised on a PR. One of the shapes of prior bot feedback the dedup check matches against, alongside the bot's earlier top-level review bodies and its general PR comments.\
 _Avoid_: comment chain, discussion, comment
 
 #### Addressed Finding
 
-A new finding that matches a prior Review Thread the bot itself posted. That thread is either marked resolved, or has a reply the agent judges as fixing it. Dropped from the draft; never posted again.\
+A new finding that matches prior feedback the bot itself posted on the PR: a Review Thread, an earlier top-level review body, or a general PR comment. A thread counts as addressed when it's resolved or has a reply the agent judges as fixing it. A review body or PR comment carries no resolved bit, so it counts as addressed only when the current diff or a later author reply visibly answers the point. Dropped from the draft; never posted again.\
 _Avoid_: resolved finding, fixed finding
 
 #### Open Finding
 
-A new finding that matches a prior Review Thread the bot itself posted, but that thread is neither resolved nor addressed by a reply. Dropped from the draft to avoid duplicating the bot's own still-open comment. Listed separately from Addressed Findings in the step-7 draft, so the user can see it was intentionally skipped, not missed.\
+A new finding that matches prior bot feedback on the PR that nothing has resolved: an unresolved Review Thread, or a review-body or PR-comment point the diff and later replies leave unanswered. Dropped from the draft to avoid duplicating the bot's own still-open point. Listed separately from Addressed Findings in the step-9 draft, so the user can see it was intentionally skipped, not missed.\
 _Avoid_: duplicate finding, repeat finding
 
 #### New Finding
 
-A finding with no matching prior Review Thread from the bot. Drafted as a fresh inline comment, same as today's behavior.\
+A finding that matches no prior bot feedback on the PR, or whose match is ambiguous. Drafted as a fresh comment: inline when it anchors to a file and line, otherwise folded into the top-level review body.\
 _Avoid_: fresh finding
 
 ### Address Comments
