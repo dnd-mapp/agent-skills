@@ -6,9 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-08-30
+
 ### Added
 
-- `address-comments` skill: works through a pull request's unresolved review threads, unaddressed general PR comments, and unaddressed review summaries. For each, it applies a reviewed plan of code changes, replies, follow-up tickets, and thread resolutions.
+- `address-comments` skill: works through a pull request's unresolved review threads, unaddressed general PR comments, and unaddressed review summaries. For each, it applies a reviewed plan of code changes, replies, follow-up tickets, and thread resolutions. Registered in the plugin manifest's `skills` list.
+- `file-ticket` skill: files a ticket on the repo's issue tracker, drafting a title and body from the conversation, filling the repo's issue template if present, checking for near-duplicates, and creating it after your review. Tracker-specific mechanics live in per-integration operation files, with `operations/github.md` shipping first. Registered in the plugin manifest's `skills` list.
 
 ## [1.3.0] - 2026-08-25
 
@@ -51,7 +54,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Repo identity (name, description, README, `CONTEXT.md`) updated to reflect its actual purpose: building Agent Skills and Subagent definitions for `dnd-mapp`.
 
-[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/dnd-mapp/agent-skills/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.4.0
 [1.3.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.3.0
 [1.2.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/dnd-mapp/agent-skills/releases/tag/v1.1.0
